@@ -2,6 +2,8 @@
  * Created by jessebstone on 9/22/15.
  */
 
+//making a change to test git...
+
 define(['./inventory','nv','./priceData','./moneyPanel','./timer'],function(inventory,nv,pricedata,moneyPanel,timer) {
 
     var min_btc = 1;
