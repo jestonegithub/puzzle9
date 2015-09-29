@@ -1,0 +1,42 @@
+.holder { height:24px;}
+
+#volume_button{
+
+    background: url(../images/volume_icon.jpg);
+    background-size:contain;
+    height:20px;
+    width:20px;
+    float:left;
+    margin-top: 3px;
+
+
+}
+
+.puzzle_def1 { font-size: 24pt;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.puzzle_def2 { font-size: 16pt;
+    width:70px;
+    float:left;
+
+}
+
+.puzzle_def3 { font-size: 12pt;
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color:grey;}
+
+.puzzle_def4 { font-size: 12pt;
+    display:inline-block;
+}
+
+.confused_word {
+    margin-right: 6px;
+    margin-left: 6px;}
+
+.sense_word {
+    margin-right: 6px;
+    margin-left: 6px;}
