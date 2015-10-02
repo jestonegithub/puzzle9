@@ -418,7 +418,7 @@ input[type="text"] {
     /*border-top: 1px solid white;*/
 }
 
-.btn {
+.btn_my {
 
     padding: 10px 20px 10px 20px;
     width:120px;
@@ -634,6 +634,108 @@ input[type="text"] {
 
 
 }
+
+/*Store Stuff*/
+
+#store_div{
+
+    position:absolute;
+    top:5px;
+    left:5px;
+    background-color: #d8d8d8;
+    height:400px;
+    width:600px;
+    border: 2px solid white;
+    /*border-radius:20px;*/
+
+
+}
+
+
+.store_style{
+
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+
+
+}
+
+#store_title {
+
+    margin-left: 20px;
+    color:black;
+    margin-top:10px;
+
+}
+
+#store_address {
+    margin-top:15px;
+    margin-left:15px;
+    position:relative;
+    float:left;
+    width:400px;
+
+}
+
+.container{
+
+    width:200px;
+
+}
+
+
+#torque_address_input{
+
+    height:20px;
+    width:400px;
+    font-size:12px;
+
+}
+
+#store_menu{
+
+    position:relative;
+    float:left;
+    width:100px;
+    height:20px;
+    margin-top:12px;
+
+}
+
+.store_menu {
+
+    color:grey;
+    font-size:15px;
+    display:inline;
+    margin-left:20px;
+    cursor: pointer;
+
+
+}
+
+#store_top{
+
+    position:relative;
+    height:80px;
+
+}
+
+.store_menu:hover {
+
+    color:white;
+
+}
+
+#store_content_area{
+
+    position:relative;
+    width:598px;
+    height:306px;
+    background-color:white;
+
+}
+
 
 #rm_weather_div{
 

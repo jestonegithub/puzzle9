@@ -3,7 +3,7 @@
  */
 
 
-define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ewallet'],function(rainmeter,terminal,feed,controlPanel,progressbar,ewallet) {
+define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ewallet','./store'],function(rainmeter,terminal,feed,controlPanel,progressbar,ewallet,store) {
 
 
     var home_screen_initialized = false;
@@ -65,6 +65,10 @@ define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ew
 
 
         ewallet.init();
+        $('#ewallet_div').hide();
+
+        store.init();
+
 
 
 

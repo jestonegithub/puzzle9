@@ -17,7 +17,8 @@ requirejs.config({
     shim: {
         'progressbar':{ deps:[],exports: 'progressbar'},
         'd3':{deps:[],exports:'d3'},
-        'nv':{deps:['d3'],exports:'nv'}
+        'nv':{deps:['d3'],exports:'nv'},
+        'bootstrap':{deps:['jquery'],exports:'bootstrap'}
 
 
     }
