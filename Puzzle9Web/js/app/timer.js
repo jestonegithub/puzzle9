@@ -47,21 +47,23 @@ define ( function(){
 
 
 
-// TODO: modify the callBack functionality so you can register a function AND a time interval when you want it to execute (some multiple of the global time)
-    //  THEN you only have to call it every X seconds, rather than at each new global time interval.
+
+
 
     // object listing [registering modules, callback functions] - elements assigned a name by module
+    // objects will register as so: {name: {function: func, start: start_time, interval: update_interval, arg: arg}}
+       // arg is any argument you want to apply to the func at callback time
 
-    // objects will register as so: {name: {function: func, start: start_time, interval: update_interval}}
     var callBackList = {};
 
     var start_time;
 
-    var addToList = function(name,arr,update_interval) {
+    var addToList = function(name,arr,update_interval,arg) {
 
         start_time=global_time;
-        callBackList[name] = {callback: arr, start: start_time, interval: update_interval};
-        console.log('called')
+        callBackList[name] = {callback: arr, start: start_time, interval: update_interval,arg:arg};
+        console.log(callBackList);
+
 
     };
 
@@ -82,17 +84,22 @@ define ( function(){
         if (global_time%game_date_duration === 0){game_date+=1;} //increments day based on game_date_duration
 
 
-        console.log(global_time);
+
 
         for (var name in callBackList) {
             if (callBackList.hasOwnProperty(name)) {
 
 
-                console.log(global_time,callBackList[name]['start'],callBackList[name]['interval']);
+
                 if ((global_time-callBackList[name]['start'])%callBackList[name]['interval'] === 0) {
 
 
+                    if (callBackList[name]['arg'] != undefined) {
+                    callBackList[name]['callback'](callBackList[name]['arg']);
+                    }
+                    else {
                     callBackList[name]['callback']();
+                    }
 
                 }
 
@@ -108,8 +115,6 @@ define ( function(){
     var looper = function() {
 
         loopID = setInterval(updater,interval);
-        console.log(loopID);
-
 
     };
 

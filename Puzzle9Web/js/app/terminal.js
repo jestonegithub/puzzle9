@@ -4,7 +4,7 @@
 
 
 
-define(['./controlPanel','./ewallet'],function(controlPanel,ewallet) {
+define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,store) {
 
 
     var init = function(){
@@ -60,16 +60,29 @@ define(['./controlPanel','./ewallet'],function(controlPanel,ewallet) {
 
             //'sudo apt-get install bitzwallet'
 
-            test1:function(){
+            ewallet:function(){
+
 
                 ewallet.init();
                 controlPanel.add_control('ewallet');
                 controlPanel.ewallet_loaded=true;
 
 
+            },
+
+            store:function(){
+
+                if (controlPanel.ewallet_loaded != true){
+
+                }
+                else {
+                    store.init();
+                    controlPanel.add_control('store');
+                    controlPanel.store_loaded = true;
+                }
+
+
             }
-
-
 
         };
 
@@ -79,9 +92,10 @@ define(['./controlPanel','./ewallet'],function(controlPanel,ewallet) {
         // read command line input
         var input1=$('#user_input').val();
 
-        //call appropriate action function using dict.
+        //call appropriate action function using dict. - check that action hasn't already been done...
 
-        action['test1']();
+        if (controlPanel[input1+'_loaded'] != true){
+        action[input1]();}
         //cloudHack.add_control('ewallet');
 
 

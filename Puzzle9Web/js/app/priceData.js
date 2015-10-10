@@ -125,7 +125,7 @@ define(['d3','./timer'],function(d3,timer) {
 
     var update_prices = function() {
 
-        console.log('success?');
+
 
 
 

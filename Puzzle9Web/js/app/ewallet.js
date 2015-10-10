@@ -10,9 +10,10 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
        //sets up the e-wallet divs and menu
 
        $('#home_screen').append('<div id=ewallet_div class="wallet_style">' +
-       '<div id=wallet_title class=wallet_style>bitstash</div>'+
-       '<div id=wallet_menu><p id="mine_item" class="wallet_menu">Mine Coins</p><p id="trade_item" class="wallet_menu">Trade</p></div>'+
+       '<div id="wallet_header"><div id=wallet_title class=wallet_style>bitstachio</div>'+
+       '<div id=wallet_menu><p id="mine_item" class="wallet_menu">Mine Coins</p><p id="trade_item" class="wallet_menu">Trade</p></div></div>'+
        '<div id=wallet_content_area>' +
+            '<div id=bitstachio_landing>THE EASIEST PLACE TO GET BITCOINS</div>'+
             '<div id=mine></div>' +
             '<div id=trade>' +
                 '<div id=transact_div></div>'+
@@ -20,6 +21,7 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
             '</div>'+
        '</div>'+
        '</div>');
+
 
        $('#mine').hide();
        $('#trade').hide();
@@ -30,6 +32,7 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
            $('#trade_item').css('text-decoration','none');
            $('#mine_item').css('text-decoration','underline');
 
+           $('#bitstachio_landing').hide();
            $('#trade').hide();
            $('#mine').show();
 
@@ -40,6 +43,7 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
            $('#mine_item').css('text-decoration','none');
            $('#trade_item').css('text-decoration','underline');
 
+           $('#bitstachio_landing').hide();
            $('#mine').hide();
            $('#trade').show();
 
@@ -53,6 +57,7 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
 
        trade.init(change_btc,change_dollars,currency);
 
+       $('#ewallet_div').hide();
 
       // chart.init();
 
@@ -83,7 +88,22 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
 
     };
 
-   return{init:init};
+    var get_avail_btc = function() {
+
+        return currency.btc;
+    }
+
+    var get_avail_dollars = function(){
+
+        return currency.dollars;
+    }
+
+   return{init:init,
+          get_avail_btc:get_avail_btc,
+          get_avail_dollars:get_avail_dollars,
+          change_btc:change_btc,
+          change_dollars:change_dollars
+   };
 
 
 

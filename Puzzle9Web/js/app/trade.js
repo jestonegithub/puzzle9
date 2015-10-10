@@ -34,6 +34,7 @@ define(['./inventory','nv','./priceData','./moneyPanel','./timer'],function(inve
 
         // initialize the money panel - shows current btc price ($) and recent change
 
+        $('#money_panel').addClass('money_panel');
         moneyPanel.init_money_panel(conversion_rate,price_change);
 
 
@@ -62,7 +63,7 @@ define(['./inventory','nv','./priceData','./moneyPanel','./timer'],function(inve
 
         $('#btc_amt').on("keyup",function(){
 
-            console.log('keypress detected');
+
             btc_to_usd();
 
 
@@ -133,8 +134,6 @@ define(['./inventory','nv','./priceData','./moneyPanel','./timer'],function(inve
     // set of functions that need to be updated on a 'daily' bases - these are registered with priceData, which calls them - NOT timer
     var update_trade_data = function(){
 
-
-        console.log('go');
         moneyPanel.update_ticker();
         $('.nvtooltip').remove(); //removes any tooltip being shown when update occurs (otherwise end up with ghost tooltips)
         init_chart();
@@ -160,7 +159,6 @@ define(['./inventory','nv','./priceData','./moneyPanel','./timer'],function(inve
 
         var input_value = $('#btc_amt').val();
 
-        console.log($('#btc_amt').val());
 
 
         if (validated(input_value)) {

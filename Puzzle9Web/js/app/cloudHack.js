@@ -30,11 +30,13 @@ define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ew
 
 
         $('body').append('<div id=game_wrapper></div>');
-   //DEV ONLY     $('#game_wrapper').hide();
+       // $('#game_wrapper').hide();
 
             //divide game_wrapper into an inventory div, a money panel div, a control panel div and a homescreen div
             $('#game_wrapper').append('<div id=inventory></div><div id=money_panel></div><div id="inventory_menu"></div><div id=control_panel></div><div id=home_screen>' +
             '<img id=homescreen_image src="../images/city_backdrop.jpg"></div>');
+
+
 
 
             // fill inventory div with div boxes (these will be dynamically given ids later)
@@ -52,22 +54,21 @@ define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ew
             //initialize the terminal (for later use), initialize the control panel: add home icon and terminal icon, startup the feed
 
 
-        //-------------- for dev purposes only...bypassing terminal...
 
-        // SHORTCUT - unhighlight after dev done
-        //    controlPanel.add_control('home');
-        //    terminal.init();
-        //    controlPanel.add_control('terminal');
-        //    controlPanel.terminal_loaded = true;
+            controlPanel.add_control('home');
+            terminal.init();
+            controlPanel.add_control('terminal');
+            controlPanel.terminal_loaded = true;
 
-        //remove all below after dev done & remove ewallet from deps of cloudhack...
-        $('#home_screen').append('<div id=terminal></div>');
-
-
-        ewallet.init();
-        $('#ewallet_div').hide();
-
-        store.init();
+        ////remove all below after dev done & remove ewallet from deps of cloudhack...
+        //$('#home_screen').append('<div id=terminal></div>');
+        //
+        //
+        //ewallet.init();
+        //
+        //
+        //store.init();
+        //$('#store_div').hide();
 
 
 

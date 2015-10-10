@@ -10,7 +10,7 @@ define([],function() {
 
     var ewallet_loaded = false;
 
-    var market_loaded = false;
+    var store_loaded = false;
 
 
     var add_control = function(control_type){
@@ -23,7 +23,7 @@ define([],function() {
 
                     $('#terminal_div').hide();
                     $('#ewallet_div').hide();
-                    $('#market_div').hide();
+                    $('#store_div').hide();
                 },
 
                 terminal: function(){
@@ -31,7 +31,7 @@ define([],function() {
                  //clicking on the terminal button toggles the terminal div
 
                     $('#ewallet_div').hide();
-                    $('#market_div').hide();
+                    $('#store_div').hide();
                     $('#terminal_div').toggle();
 
                 },
@@ -41,17 +41,17 @@ define([],function() {
                     //clicking on the ewallet button toggles the ewallet div
 
                     $('#terminal_div').hide();
-                    $('#market_div').hide();
+                    $('#store_div').hide();
                     $('#ewallet_div').toggle();
                 },
 
-                market: function(){
+                store: function(){
 
                     //clicking on the market button toggles the market div
 
                     $('#terminal_div').hide();
                     $('#ewallet_div').hide();
-                    $('#market_div').toggle();
+                    $('#store_div').toggle();
                 }
             };
 
@@ -62,14 +62,16 @@ define([],function() {
 
                 home: 'class="fa fa-home"',
                 terminal: 'class="fa fa-terminal"',
-                ewallet: 'class="fa fa-university"'
+                ewallet: 'class="fa fa-university"',
+                store: 'class="fa fa-shopping-cart"'
             };
 
             var div_id ={
 
                 home: '.fa-home',
                 terminal: '.fa-terminal',
-                ewallet: '.fa-university'
+                ewallet: '.fa-university',
+                store: '.fa-shopping-cart'
 
 
             };
@@ -85,7 +87,7 @@ define([],function() {
 
     return {terminal_loaded:terminal_loaded,
             ewallet_loaded:ewallet_loaded,
-            market_loaded:market_loaded,
+            store_loaded:store_loaded,
             add_control:add_control}
 
 

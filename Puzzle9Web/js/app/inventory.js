@@ -32,6 +32,19 @@ define(['./ewallet'],function(ewallet) {
    //---------------------------------------------
 
 
+   // "hidden" inventory items (like server stuff)
+
+    //var servers = {
+    //
+    //    CPU_server: {
+    //
+    //        num_running:0
+    //
+    //    }
+    //
+    //
+    //};
+
 
 
 
