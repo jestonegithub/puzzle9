@@ -7,11 +7,13 @@ define([],function() {
 
     var init = function(){
 
-        $('#home_screen').append('<div id=feed_div><div id=feed_header><i class="fa fa-rss-square"></i><div id=feed_title1>MSGS |</div>' +
-        '<div id=feed_title2>FEEDS</div></div>' +
+        $('#home_screen').append('<div id=feed_div><div id=feed_header>' +
+        '<i class="fa fa-twitter"></i>' +
+        '<div class=feed_title id=feed_title1>@user137</div></div>' +
+        //'<div class=feed_title id=feed_title2>FEEDS</div></div>' +
         '<div id=feed_content><div id=notifyGradient></div></div></div>');
 
-        pushNotifications('(no new messages)');
+
 
 
 
@@ -47,10 +49,24 @@ define([],function() {
 
 
 
+    var tweet = function(handle,t) {
+
+        var text = $('<div>').addClass('notification').css('opacity', '0').prependTo('#feed_content');
+        $('#feed_content').children().eq(0).append('<div class=handle>'+handle+': </div><div class=tweet_content>'+t+'</div>');
+        text.animate({opacity: 1}, 500, 'linear', function () {
+            // Do this every time we add a new message, this way we never have a large backlog to iterate through. Keeps things faster.
+            clearNotifications();
+        });
+
+
+
+    };
+
 
 
     return{init:init,
-    pushNotifications:pushNotifications};
+    pushNotifications:pushNotifications,
+    tweet:tweet};
 
 
 

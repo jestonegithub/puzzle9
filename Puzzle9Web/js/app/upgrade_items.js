@@ -17,7 +17,7 @@ define(['./ewallet','bootstrap','./mining_control'],function(ewallet,bootstrap,m
     Server.prototype = {
         constructor:Server,
         item_type:"Server",
-        values: ["none","CPU","GPU","ASIC","QPU"],
+        values: [" ","CPU","GPU","ASIC","QPU"],
         costs: [0,100,200,300,400],
         speeds:[0,4,3,2,1],
         icon:"fa fa-server",

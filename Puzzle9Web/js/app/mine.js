@@ -28,7 +28,7 @@ define(['./inventory','./upgrade_items','./mining_control'],function(inventory,u
 
         // initialize the servers and the server divs FOR REMOTE COMPUTERS
 
-        for (i=0;i<5;i++){
+        for (i=0;i<6;i++){
 
             servers.push(new upgradeitems.Server(i));
             $('#mine').append('<div class=mine_server id=miner'+ i.toString()+'></div>');

@@ -3,7 +3,7 @@
  */
 
 
-define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ewallet','./store'],function(rainmeter,terminal,feed,controlPanel,progressbar,ewallet,store) {
+define(['./rbn_actor','./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ewallet','./store'],function(rbn_actor,rainmeter,terminal,feed,controlPanel,progressbar,ewallet,store) {
 
 
     var home_screen_initialized = false;
@@ -15,26 +15,29 @@ define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ew
 
        //first we need to generate a 'connecting to remote desktop' transition screen - we can load resources during this time if needed
 
- // DEV ONLY
+        // DEV ONLY
         //$('#start_button').css('margin-top','300px');
         //
         //var start_button = new progressbar.Circle('#start_button', {strokeWidth:2, color:'#FCB03C',text:{value:'Connecting to Remote Desktop'}});
         //
         //
-        //start_button.animate(1,{duration:1800},function() {
+        //start_button.animate(1,{duration:3000},function() {
         //
         //    $('#start_button').remove();
-        //    $('#game_wrapper').fadeIn('slow');
+        //    $('#game_wrapper').fadeIn(2000);
         //
         //});
 
 
         $('body').append('<div id=game_wrapper></div>');
-       // $('#game_wrapper').hide();
+
+        //DEV ONLY
+        //$('#game_wrapper').hide();
 
             //divide game_wrapper into an inventory div, a money panel div, a control panel div and a homescreen div
             $('#game_wrapper').append('<div id=inventory></div><div id=money_panel></div><div id="inventory_menu"></div><div id=control_panel></div><div id=home_screen>' +
-            '<img id=homescreen_image src="../images/city_backdrop.jpg"></div>');
+            '<img id=homescreen_image src="../images/lights2.jpeg">' +
+            '</div>');
 
 
 
@@ -60,16 +63,8 @@ define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ew
             controlPanel.add_control('terminal');
             controlPanel.terminal_loaded = true;
 
-        ////remove all below after dev done & remove ewallet from deps of cloudhack...
-        //$('#home_screen').append('<div id=terminal></div>');
-        //
-        //
-        //ewallet.init();
-        //
-        //
-        //store.init();
-        //$('#store_div').hide();
 
+            setTimeout(rbn_actor.init_actor,4000);
 
 
 
@@ -77,8 +72,6 @@ define(['./rainmeter','./terminal','./feed','./controlPanel','progressbar','./ew
 
 
    };
-
-
 
 
 

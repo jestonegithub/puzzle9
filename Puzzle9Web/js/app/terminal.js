@@ -6,6 +6,13 @@
 
 define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,store) {
 
+    var control_nickname={
+
+        "install bit-o-matic": 'ewallet',
+        store:'store'
+
+    };
+
 
     var init = function(){
 
@@ -15,7 +22,7 @@ define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,st
         '<div id=terminal_body>' +
         '<div id=terminal_display>Last login: Sun Sep 20 00:40:14 on ttys000 </div>' +
         '<div id=terminal_input></div><div id=command_line_user>user137$</div>' +
-        '<form id=form_command>'+
+        '<form id=form_command autocomplete="off">'+
             '<input type="text" name="command" id="user_input">'+
             '<input type="submit" value="Submit" id="console_submit">'+
         '</form>' +
@@ -60,7 +67,7 @@ define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,st
 
             //'sudo apt-get install bitzwallet'
 
-            ewallet:function(){
+            "install bit-o-matic":function(){
 
 
                 ewallet.init();
@@ -94,12 +101,18 @@ define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,st
 
         //call appropriate action function using dict. - check that action hasn't already been done...
 
-        if (controlPanel[input1+'_loaded'] != true){
-        action[input1]();}
-        //cloudHack.add_control('ewallet');
+        if (action[input1] != undefined) {
 
 
+            if (controlPanel[control_nickname[input1] + '_loaded'] != true) {
+                action[input1]();
+            }
+            //cloudHack.add_control('ewallet');
 
+        }
+        //clear command from input line after enter
+
+        $('#user_input').val("");
 
 
 

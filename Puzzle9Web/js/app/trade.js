@@ -159,7 +159,7 @@ define(['./inventory','nv','./priceData','./moneyPanel','./timer'],function(inve
 
         var input_value = $('#btc_amt').val();
 
-
+        get_conversion();
 
         if (validated(input_value)) {
 

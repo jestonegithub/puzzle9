@@ -17,19 +17,18 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
 
 
 
-        $('#home_screen').append('<div id=store_div class="store_style"><div id="store_top"><div id="store_title">TORque</div>' +
+        $('#home_screen').append('<div id=store_div class="store_style"><div id="store_top"><div id="store_title">Crypton</div>' +
         '<div id="store_address"><input type="text" name="command" id="torque_address_input" placeholder="localhost:8123/#" disabled></div><div id=store_menu>'+bootstrap_menu+'</div></div>'+
         '<div id=store_content_area></div></div>');
 
         add_site("Cloud Awesome",'cloudawesome');
 
-        //DEV ONLY
-        ewallet.change_dollars(1100);
+        
 
 
 
         // fills the cloudawesome store items with all the servers
-        for (i=0;i<5;i++) {
+        for (i=0;i<6;i++) {
 
             store_items.cloudawesome['server'+ i.toString()]=mine.servers[i];
 

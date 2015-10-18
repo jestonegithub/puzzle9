@@ -10,10 +10,13 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
        //sets up the e-wallet divs and menu
 
        $('#home_screen').append('<div id=ewallet_div class="wallet_style">' +
-       '<div id="wallet_header"><div id=wallet_title class=wallet_style>bitstachio</div>'+
+       '<div id="wallet_header"><div id=wallet_title class=wallet_style>bit-o-matic</div>'+
        '<div id=wallet_menu><p id="mine_item" class="wallet_menu">Mine Coins</p><p id="trade_item" class="wallet_menu">Trade</p></div></div>'+
        '<div id=wallet_content_area>' +
-            '<div id=bitstachio_landing>THE EASIEST PLACE TO GET BITCOINS</div>'+
+            '<div id=bitstachio_landing>' +
+                '<p>Getting bitcoins has never been easier.</p>'+
+                '<i class="fa_landing fa fa-cc-visa"></i><i class="fa_landing fa fa-cc-mastercard"></i><i class="fa_landing fa fa-paypal"></i>'+
+            '</div>'+
             '<div id=mine></div>' +
             '<div id=trade>' +
                 '<div id=transact_div></div>'+

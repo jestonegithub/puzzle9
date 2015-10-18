@@ -34,6 +34,13 @@ define([],function() {
                     $('#store_div').hide();
                     $('#terminal_div').toggle();
 
+                    //forces focus on input command line when terminal is displayed
+                    if ($('#terminal_div').is(":visible")){
+                        $('#user_input').focus();
+
+                    }
+
+
                 },
 
                 ewallet: function(){
@@ -63,7 +70,7 @@ define([],function() {
                 home: 'class="fa fa-home"',
                 terminal: 'class="fa fa-terminal"',
                 ewallet: 'class="fa fa-university"',
-                store: 'class="fa fa-shopping-cart"'
+                store: 'class="fa fa-chrome"'
             };
 
             var div_id ={
@@ -71,7 +78,7 @@ define([],function() {
                 home: '.fa-home',
                 terminal: '.fa-terminal',
                 ewallet: '.fa-university',
-                store: '.fa-shopping-cart'
+                store: '.fa-chrome'
 
 
             };

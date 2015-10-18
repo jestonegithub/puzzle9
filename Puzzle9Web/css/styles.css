@@ -1,7 +1,7 @@
 
 #color_finder{
 
-    color: #ffffff;
+    color: #572c94;
 
 }
 
@@ -14,16 +14,14 @@ body {
     background-size: 100%;
     width:100%;
     display:table;
-    background-color: #3d5d63;
+    /*background-color: #198d67;*/
+    background-color: #424345;
 }
 
 /*#background{*/
-
     /*width: 1920px;*/
     /*height: 1200px;*/
     /*background: url(../images/blue-bird_back.jpeg);*/
-
-
 /*}*/
 
 #title_circle{
@@ -111,7 +109,7 @@ body {
 .on {
 
     /*border: 2px solid black;*/
-    background-color:rgba(249, 178, 104, 1);
+    background-color: rgb(250, 69, 76);
     float:left;
     border:1px solid white;
 
@@ -244,7 +242,7 @@ body {
     /*background:url(../images/blue-bird_back.jpeg);*/
     /*object-fit: contain;*/
 
-    border: 3px solid rgb(209, 209, 209);
+    border: 3px solid rgb(254, 254, 254);
 
 }
 
@@ -265,11 +263,83 @@ body {
     height:420px;
     width:610px;
     /*background: rgba(249, 178, 104, 1);*/
+    font-family: 'Raleway', sans-sarif;
+    font-weight: 100;
+}
 
+#os_text1 {
+
+
+    margin-left:50px;
+    font-size: 25px;
+    width:100px;
+    float:left;
+    position:relative;
+    color: #4488c0;
+
+}
+
+#os_text2{
+
+
+    font-size:25px;
+    width:40px;
+    float:left;
+    position:relative;
+    margin-left:20px;
+    color: #bccbf9;
+
+}
+
+
+#payment_widget{
+
+    color:white;
+    position:absolute;
+    top:60px;
+    left:20px;
+    /*border: 1px solid white;*/
+    padding-top:10px;
+    padding-right:10px;
+    padding-left:10px;
+    padding-bottom:10px;
+    width:200px;
 
 
 }
 
+#os_label{
+
+    position:absolute;
+    top:100px;
+    left:50px;
+
+}
+
+.progress{
+
+    width:80px;
+    height:10px;
+
+}
+
+.progress-bar{
+
+    background-color: #584d6f;
+
+}
+
+#payment_button{
+
+
+    width:60px;
+    background-color: rgba(255, 255, 255, 1);
+    color: #fe3e46;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+
+}
 
 /* control window stuff */
 
@@ -300,7 +370,8 @@ body {
 
 #terminal_body{
 
-    background-color:white;
+    background-color: #424345;
+    color:white;
     border:2px solid rgb(209, 209, 209);
     height:375px;
     border-bottom-left-radius: 10px;
@@ -311,6 +382,7 @@ body {
 #terminal_display{
 
     height:325px;
+    padding-left:10px;
 }
 
 
@@ -336,12 +408,17 @@ body {
 
 }
 
+
+
+input:-webkit-autofill { -webkit-box-shadow:0 0 0 500px white inset; }
+
 #command_line_user{
 
-    margin-top:4px;
+    margin-top:2px;
     margin-right:5px;
     position:relative;
     float:left;
+    padding-left:10px;
 
 
 
@@ -354,12 +431,23 @@ input[type="text"] {
     /*font-family: sans-serif;*/
     /*font-size: 12px;*/
     appearance: none;
+    border:0;
     box-shadow: none;
     border-radius: none;
     float:left;
+
+
 }
 
+#user_input{
 
+
+    background-color: #424345;
+}
+
+input[type="text"]:focus {
+    outline-width: 0;
+}
 
 /* ewallet stuff */
 
@@ -369,7 +457,7 @@ input[type="text"] {
     top:5px;
     left:5px;
     /*background-color: #c3d4df;*/
-    background-color: #98b82f;
+    background-color: #fb7a33;
     height:400px;
     width:600px;
     border: 2px solid white;
@@ -432,6 +520,12 @@ input[type="text"] {
 
 }
 
+.fa_landing{
+
+    margin-left:20px;
+    marging-right:20px;
+
+}
 
 #mine {
 
@@ -491,7 +585,7 @@ input[type="text"] {
 
     margin-top:10px;
     font-size:12px;
-    color:grey;
+    color: #ffffff;
     min-height: 20px;
     width:300px;
     margin-left: 150px;
@@ -505,7 +599,7 @@ input[type="text"] {
 
     margin-top:10px;
     font-size:12px;
-    color:grey;
+    color: #ffffff;
     min-height: 20px;
     width:300px;
     margin-left: 150px;
@@ -596,7 +690,7 @@ input[type="text"] {
 
 .conversion_rate{
 
-    color:grey;
+    color: #000000;
     font-size:18px;
     margin-top:5px;
     display:inline;
@@ -627,7 +721,7 @@ input[type="text"] {
     position:relative;
     float:left;
     display:inline;
-    color:grey;
+    color: #000000;
     font-weight: bold;
     min-width: 5px;
     margin-left:10px;
@@ -780,7 +874,7 @@ input[type="text"] {
 
     color:black;
     font-size:20px;
-
+    margin-right:17px;
 }
 
 .server_name{
@@ -886,7 +980,7 @@ input[type="text"] {
 #rm_day {
 
     position:absolute;
-    color:rgba(249, 178, 104, 1);
+    color: rgb(255, 255, 255);
     font-size: 70px;
     top:100px;
     left:70px;
@@ -899,7 +993,7 @@ input[type="text"] {
 #rm_date {
 
     position:absolute;
-    color:rgba(249, 178, 104, 1);
+    color: rgb(255, 255, 255);
     font-size: 200px;
     font-weight: 700;
     width:100px;
@@ -985,7 +1079,9 @@ input[type="text"] {
     width:50px;
     text-align: center;
     float:right;
-    color: #ffffff;
+    color: #dee0e3;
+    font-size: 30px;
+    cursor: pointer;
 
 }
 
@@ -1021,74 +1117,111 @@ input[type="text"] {
     float:left;
     width:304px;
     height:414px;
-    /*background-color: rgba(253, 205, 241, 0.80);*/
+    background-color: rgba(37, 37, 37, 0.70);
     /*border-left: 3px solid rgb(255, 255, 255);*/
-    background-color: rgba(13, 46, 63, 0.60);
+    /*background-color: rgba(13, 46, 63, 0.60);*/
     font-family: 'Open Sans', sans-serif;
+    border-left:1px solid lightgrey;
     /*font-family: Arial;*/
 
 
 }
 
-.fa-rss-square{
+/*.fa-rss-square{*/
 
-    font-size: 50px;
-    width:60px;
-    height:60px;
-    float:left;
+    /*font-size: 50px;*/
+    /*width:60px;*/
+    /*height:60px;*/
+    /*float:left;*/
     /*margin-top:3px;*/
-    margin-left:15px;
-    margin-top:7px;
-    color: rgb(255, 255, 255);
+    /*margin-left:15px;*/
+    /*margin-top:7px;*/
+    /*color: rgb(255, 255, 255);*/
 
 
-}
+/*}*/
+
+
+
 
 #feed_header {
 
-    font-size:25px;
-    height:70px;
+    font-size:18px;
+    color:white;
+    height:40px;
     /*margin-top:10px;*/
-    background-color:rgba(249, 178, 104, 1);
-    border: 3px solid rgb(209, 209, 209);
+    /*background-color: rgb(255, 255, 255);*/
+    /*border: 3px solid rgb(209, 209, 209);*/
     /*border-top: 10px solid rgba(249, 178, 104, 1);*/
     /*margin-left: 10px;*/
     /*background-color:rgba(249, 178, 104, 1);*/
+    padding-left:15px;
+    padding-top:8px;
 
 
 }
 
+.fa-twitter{
+
+    font-size:24px;
+    color: #fefefe;
+    position:relative;
+    float:left;
+    width:30px;
+
+}
+
+
+#feed_title1{
+
+    position:relative;
+    float:left;
+    width:70px;
+    height:30px;
+    font-weight: 100;
+    margin-left:15px;
+    color: #838383;
+
+
+}
+
+/*#feed_title2{*/
+
+    /*width:90px;*/
+    /*height:40px;*/
+    /*font-weight: 200;*/
+    /*color: #ffffff;*/
+    /*float:left;*/
+    /*margin-top:15px;*/
+    /*position:relative;*/
+    /*float:left*/
+/*}*/
+
+
+
 #feed_content {
 
-    font-size:16px;
-    color: #ffffff;
+    font-size:14px;
+    color: #fefefe;
     margin-top:10px;
-    margin-left: 20px;
+    margin-left: 15px;
     /*background-color:rgba(249, 178, 104, 1);;*/
     overflow: hidden;
 
 }
 
-#feed_title1{
+.handle {
 
-    width:90px;
-    height:40px;
-    font-weight: 200;
-    float:left;
-    margin-left:5px;
-    color: #ffffff;
-    margin-top:15px;
+    display:inline;
+    color: #dadada;
 
 }
 
-#feed_title2{
+.tweet_content {
 
-    width:90px;
-    height:40px;
-    font-weight: 200;
-    color: #ffffff;
-    float:left;
-    margin-top:15px;
+    display:inline;
+
+
 }
 
 .notifications {
