@@ -169,6 +169,33 @@ body {
 
 }
 
+
+
+#network_window{
+
+    position:absolute;
+    top:5px;
+    left:5px;
+    width:600px;
+    height:700px;
+    background-color: white;
+
+
+}
+
+
+.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+.link {
+    fill: none;
+    stroke: #bbb;
+}
+
+
+
 #money_panel {
 
     position:relative;
@@ -768,6 +795,85 @@ input[type="text"]:focus {
 
 }
 
+/* Entrepreneur Stuff */
+
+#rbn_ent_div{
+
+    position:absolute;
+    top:5px;
+    left:5px;
+    /*background-color: #c3d4df;*/
+    background-color: #fb7a33;
+    height:400px;
+    width:600px;
+    border: 2px solid white;
+    /*border-radius:20px;*/
+
+
+}
+
+#rbn_ent_header{
+
+    height:80px;
+
+
+}
+
+.rbn_ent_style{
+
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+
+
+}
+
+#rbn_ent_title {
+
+    margin-left: 20px;
+    position:relative;
+    float:left;
+
+}
+
+#rbn_ent_menu {
+    position:relative;
+    float:right;
+    margin-right:20px;
+}
+
+.rbn_ent_menu {
+
+    color: #ffffff;
+    font-size:15px;
+    display:inline;
+    margin-left:20px;
+    cursor: pointer;
+
+
+}
+
+.rbn_ent_menu:hover {
+
+    color: #628060;
+
+}
+
+#rbn_ent_landing{
+
+    color:white;
+    text-align:center;
+
+}
+
+/*.fa_landing{*/
+
+    /*margin-left:20px;*/
+    /*marging-right:20px;*/
+
+/*}*/
+
+
 /*Store Stuff*/
 
 #store_div{
@@ -1224,10 +1330,11 @@ input[type="text"]:focus {
 
 }
 
-.notifications {
+.notification {
 
     margin-bottom: 10px;
     min-height:0px;
+    //border-bottom:1px solid white;
 
 }
 

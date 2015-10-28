@@ -12,6 +12,8 @@ define([],function() {
 
     var store_loaded = false;
 
+    var rbn_ent_loaded = false;
+
 
     var add_control = function(control_type){
 
@@ -24,6 +26,7 @@ define([],function() {
                     $('#terminal_div').hide();
                     $('#ewallet_div').hide();
                     $('#store_div').hide();
+                    $('#rbn_ent_div').hide();
                 },
 
                 terminal: function(){
@@ -32,6 +35,7 @@ define([],function() {
 
                     $('#ewallet_div').hide();
                     $('#store_div').hide();
+                    $('#rbn_ent_div').hide();
                     $('#terminal_div').toggle();
 
                     //forces focus on input command line when terminal is displayed
@@ -49,6 +53,7 @@ define([],function() {
 
                     $('#terminal_div').hide();
                     $('#store_div').hide();
+                    $('#rbn_ent_div').hide();
                     $('#ewallet_div').toggle();
                 },
 
@@ -58,8 +63,20 @@ define([],function() {
 
                     $('#terminal_div').hide();
                     $('#ewallet_div').hide();
+                    $('#rbn_ent_div').hide();
                     $('#store_div').toggle();
-                }
+                },
+
+
+                rbn_ent: function(){
+
+            //clicking on the market button toggles the market div
+
+                $('#terminal_div').hide();
+                $('#ewallet_div').hide();
+                $('#store_div').hide();
+                $('#rbn_ent_div').toggle();
+        }
             };
 
 
@@ -70,7 +87,8 @@ define([],function() {
                 home: 'class="fa fa-home"',
                 terminal: 'class="fa fa-terminal"',
                 ewallet: 'class="fa fa-university"',
-                store: 'class="fa fa-chrome"'
+                store: 'class="fa fa-chrome"',
+                rbn_ent: 'class="fa fa-black-tie"'
             };
 
             var div_id ={
@@ -78,7 +96,8 @@ define([],function() {
                 home: '.fa-home',
                 terminal: '.fa-terminal',
                 ewallet: '.fa-university',
-                store: '.fa-chrome'
+                store: '.fa-chrome',
+                rbn_ent: '.fa-black-tie'
 
 
             };
@@ -95,6 +114,7 @@ define([],function() {
     return {terminal_loaded:terminal_loaded,
             ewallet_loaded:ewallet_loaded,
             store_loaded:store_loaded,
+            rbn_ent_loaded:rbn_ent_loaded,
             add_control:add_control}
 
 

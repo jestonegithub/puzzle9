@@ -25,8 +25,6 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
 
         
 
-
-
         // fills the cloudawesome store items with all the servers
         for (i=0;i<6;i++) {
 
@@ -46,14 +44,15 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
         $('#menu_'+site).click(function(){load_site(site)});
 
 
-        //'<li><a id="test">Super Servers</a></li>'+
-        //'<li><a href="#">royal road</a></li>'+
+    };
 
+    var init_forums = function(){
+
+
+        //store_items.rbn_forums['users']=
 
 
     };
-
-
 
 
 //  STORE SITES ------------------------------------------------------------------
@@ -61,6 +60,7 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
     var links = {
 
       cloudawesome:"www.cloudawesome.com"
+
 
     };
 
@@ -97,9 +97,11 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
 
     };
 
+
     var store_items = {
 
-        cloudawesome: {}
+        cloudawesome: {},
+
 
     };
 
@@ -129,7 +131,7 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
                 if (site != 'cloudawesome') {
 
                     // This is for non-cloud awesome stuff
-                    $('#ca_content').append('<div class="item_container">' +
+                    $('.items_div').append('<div class="item_container">' +
                     '<div class="item_icon_container"><i class="item_icons ' + items[name]['icon'] + '"></i></div>' +
                     '<div class="item_name">' + items[name]['name'] + '</div>' +
                     '<div class="item_cost">' + items[name]['cost'] + " " + items[name]['cost_type'] + '</div>' +
@@ -148,12 +150,7 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
                     '</div>');
 
 
-
-
-
                 }
-
-
 
 
             }
@@ -222,7 +219,8 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
         };
 
 
-    return {init:init}
+    return {init:init,
+            add_site:add_site}
 
 
 });

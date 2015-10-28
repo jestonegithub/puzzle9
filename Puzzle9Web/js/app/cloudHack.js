@@ -64,7 +64,7 @@ define(['./rbn_actor','./rainmeter','./terminal','./feed','./controlPanel','prog
             controlPanel.terminal_loaded = true;
 
 
-            setTimeout(rbn_actor.init_actor,4000);
+
 
 
 

@@ -12,7 +12,9 @@ define(['./ewallet'],function(ewallet) {
     var item_address = {
 
         bitcoin:[1,7],
-        dollar:[2,7]
+        dollar:[2,7],
+        ads:[3,7],
+        workers:[4,7]
 
     };
 
@@ -21,7 +23,9 @@ define(['./ewallet'],function(ewallet) {
     var item_name = {
 
       bitcoin:'btc',
-        dollar:'usd'
+        dollar:'usd',
+        ads:'ads',
+        workers:'workers'
 
 
 

@@ -4,7 +4,7 @@
 
 
 
-define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,store) {
+define(['./controlPanel','./ewallet','./store','./network_display','./rbn_ent','./rbn_actor'],function(controlPanel,ewallet,store,network_display,rbnent,rbnactor) {
 
     var control_nickname={
 
@@ -77,9 +77,9 @@ define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,st
 
             },
 
-            store:function(){
+            "install crypton":function(){
 
-                if (controlPanel.ewallet_loaded != true){
+                if ((controlPanel.ewallet_loaded != true) || (controlPanel.store_loaded != false)){
 
                 }
                 else {
@@ -89,7 +89,19 @@ define(['./controlPanel','./ewallet','./store'],function(controlPanel,ewallet,st
                 }
 
 
-            }
+            },
+
+            "install entrepreneur":function(){
+
+                    rbnent.init();
+                    controlPanel.add_control('rbn_ent');
+                    controlPanel.rbn_ent_loaded = true;
+
+
+            },
+
+            show_network:network_display.display_network
+
 
         };
 

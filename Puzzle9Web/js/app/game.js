@@ -2,7 +2,7 @@
  * Created by jessebstone on 2/2/15.
  */
 
-define(['./textChunks','./cloudHack','progressbar'],function(textChunks,cloudHack,progressbar) {
+define(['./textChunks','./cloudHack','progressbar','./rbn_actor'],function(textChunks,cloudHack,progressbar,rbn_actor) {
 
 
     // initialization
@@ -29,7 +29,7 @@ define(['./textChunks','./cloudHack','progressbar'],function(textChunks,cloudHac
 //
 //
 //                $('#title_circle').remove();
-//                //$('#start_button').hide();
+//                $('#start_button').hide();
 //                start_button.destroy();
 //
 //
@@ -54,22 +54,30 @@ define(['./textChunks','./cloudHack','progressbar'],function(textChunks,cloudHac
 
         // call cloud hack initialization and any timer or other general game stuff...
 
-
-
-
       cloudHack.init();
-
-
-
-
 
       //  // starts the timer
       //  timer.looper();
+
+      game_sequence();
+
+    };
+
+
+    var game_sequence = function(){
+
+        // We initialize rbn_actor, who will provide hints to newly unlocked items based on cues...want to wait a bit to introduce for dramatic effect
+        setTimeout(rbn_actor.init_actor,4000);
+
 
 
 
 
     };
+
+
+
+
 
 
 

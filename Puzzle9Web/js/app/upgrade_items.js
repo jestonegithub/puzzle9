@@ -49,6 +49,20 @@ define(['./ewallet','bootstrap','./mining_control'],function(ewallet,bootstrap,m
     };
 
 
+
+
+    function User(id) {
+
+      this.id = id;
+
+    };
+
+    User.prototype = {
+
+
+    };
+
+
     return{Server:Server}
 
 

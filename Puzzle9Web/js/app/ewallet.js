@@ -94,12 +94,12 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
     var get_avail_btc = function() {
 
         return currency.btc;
-    }
+    };
 
     var get_avail_dollars = function(){
 
         return currency.dollars;
-    }
+    };
 
    return{init:init,
           get_avail_btc:get_avail_btc,

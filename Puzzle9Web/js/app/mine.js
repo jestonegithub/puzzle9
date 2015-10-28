@@ -52,65 +52,7 @@ define(['./inventory','./upgrade_items','./mining_control'],function(inventory,u
     })
 
 };
-    //
-    //// displays mining progress using progress bar and call the update button when done.
-    //
-    //var local_mining_progress = function(change_btc){
-    //
-    //    //load the fancy button stuff for mining button
-    //
-    //    mine_attr.active=true;
-    //
-    //    var progress_timer=1000*mine_attr.cpu_default+mine_attr.difficulty*500;
-    //
-    //    var line = new progressbar.Line('#line_div',{color:'#FCB03C',strokeWidth:0.5});
-    //    line.animate(0.5,{duration:progress_timer,easing:'linear'},function(){
-    //
-    //        change_btc(mine_attr.value);
-    //        line.destroy();
-    //        mine_attr.active=false;
-    //
-    //
-    //
-    //    });
-    //
-    //};
-    //
-    //var remote_mining_progress = function(interval){
-    //
-    //    //load the fancy button stuff for mining button
-    //
-    //    var progress_timer=interval+mine_attr.difficulty*500;
-    //
-    //    var line = new progressbar.Line('#line_div',{color:'#FCB03C',strokeWidth:0.5});
-    //    line.animate(0.5,{duration:progress_timer,easing:'linear'},function(){
-    //
-    //        change_btc(mine_attr.value);
-    //        line.destroy();
-    //
-    //
-    //
-    //
-    //    });
-    //
-    //};
-    //
-    //
-    //
-    //var modify_server = function(server){
-    //
-    //    var who=server.serial.toString(); //server id
-    //    $('#miner'+who).text(server['values'][server['current']]); //displays which type of server is current (cpu, gpu, etc)
-    //
-    //
-    //    timer.removeFromList('miner'+who.toString());
-    //    if (server['values']['current'] != "none"){
-    //        var interval = server['speeds']['current'];
-    //        timer.addToList('miner'+who.toString(),remote_mining_progress,interval,interval);
-    //    }
-    //
-    //};
-    //
+
 
 
 
