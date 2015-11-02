@@ -9,6 +9,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
     var ads_cost_coeff = 1;
     var ad_worker_multiplier = 5;
     var occupation_resource_interval = 10; //i.e., # of global units per resource update from workers
+    var worker_delay = 3000; //number of ms before workers are created for each new ad
 
 
 
@@ -25,6 +26,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
     function Ads() {
 
         this.num_ads = 0;
+        this.cost = ads_cost_coeff*this.num_ads+1
 
 
     };
@@ -33,30 +35,29 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         constructor:Ads,
         item_type:"Ads",
         max:10,
-        cost: ads_cost_coeff*this.num_ads,
+        //cost: this.num_ads+1,
         icon:"fa fa-newspaper-o",
         cost_type:"USD",
         available:true,
-        buy_ads: function(){
-
-             if (ewallet.get_avail_dollars() >= this.cost ){
-
+        buy_ads: function(worker){
+             if ((ewallet.get_avail_dollars() >= this.cost) && (this.num_ads < this.max) ){
                  this.num_ads += 1;
                  ewallet.change_dollars(-1*this.cost);
-
+                 inventory.update_item('ads',this.num_ads);
+                 this.update_workers(worker);
              }
 
         },
-        delete_ads: function(num_deleted) {
+        remove_ads: function(num_deleted) {
 
                 if (this.num_ads >= num_deleted){this.num_ads -= num_deleted}
 
 
         },
 
-        update_workers: function() {
+        update_workers: function(worker) {
 
-
+               setTimeout(function(){worker.add_workers(5)},worker_delay);
 
 
         }
@@ -69,6 +70,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
 
         this.num_workers = 0;
         this.occupied_workers = 0;
+        this.avail_workers=this.num_workers-this.occupied_workers;
 
 
     };
@@ -82,6 +84,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         add_workers: function(num){
 
                 this.num_workers += num;
+                inventory.update_item('workers',this.num_workers);
 
         },
         remove_workers: function(num) {
@@ -91,26 +94,14 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         },
 
         add_occupied_workers: function(num_added) {
-
-            if ((this.num_workers-this.occupied_workers) > num_added) {
-
                 this.occupied_workers += num_added;
-
-            }
-
-
+                this.avail_workers=this.num_workers-this.occupied_workers;
         },
 
 
         remove_occupied_workers: function(num_removed) {
-
-            if (this.occupied_workers >= num_removed) {
-
                 this.occupied_workers -= num_removed;
-
-            }
-
-
+                this.avail_workers=this.num_workers-this.occupied_workers;
         }
 
 
@@ -135,6 +126,19 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         constructor:Occupation,
         item_type:"Occupation",
         available:true,
+        increase_occupation:function(worker){
+            if (worker.avail_workers < this.max){
+            this.num_active += 1;
+            worker.add_occupied_workers(1);
+            }
+        },
+        decrease_occupation: function(worker){
+            if (worker.avail_workers > 0) {
+                this.num_active -= 1;
+                worker.remove_occupied_workers(1);
+            }
+
+        },
         update_resources: function() {
 
             //register a function with timer that updates resources at resource interval
@@ -193,7 +197,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
     var occupations_table = {
 
 
-      salesmen: {
+      coders: {
 
           max: 10,
           sinks:{
@@ -225,6 +229,11 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
 
     };
 
+    return{Ads:Ads,
+    Workers:Workers,
+    Occupation:Occupation,
+    occupations_table:occupations_table,
+    init_workers:init_workers}
 
 
 });

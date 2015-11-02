@@ -12,6 +12,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         this.name = holdings_table[holdings_type]['name'];
         this.costs= holdings_table[holdings_type]['costs'];
         this.occupation_supported = holdings_table[holdings_type]['occupation_supported'];
+        this.blurb = holdings_table[holdings_type]['blurb'];
        // this.icon = holdings_table[holdings_type]['icon'];
         this.purchased = false;
 
@@ -32,11 +33,17 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
                     // special case where its btc or dollars, which don't have methods
                     if (name === 'btc' || name === 'dollars') {
 
-                        if (ewallet['get_avail_'+name] >= this.costs[name]) {ewallet['change_'+name](-1*this.costs[name])}
+                        if (ewallet['get_avail_'+name]() >= this.costs[name]) {
+                            ewallet['change_'+name](-1*this.costs[name])
+                            this.purchased=true;
+                        }
 
                     }else{
 
-                        if (resourceitems[name]['num'] >= this.costs[name]) {resourceitems[name]['remove_resource'](this.costs[name])}
+                        if (resourceitems[name]['num'] >= this.costs[name]) {
+                            resourceitems[name]['remove_resource'](this.costs[name])
+                            this.purchased=true;
+                        }
 
                     }
                 }
@@ -58,12 +65,13 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         zyng: {
 
             name:'Zyng!',
-            occupation_supported:'salesmen',
-            cost: {
+            occupation_supported:'coders',
+            costs: {
 
-                btc:10
+                btc:1
 
-            }
+            },
+            blurb:'Addictive games with Adware.'
 
 
         },
@@ -73,7 +81,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
 
             name: 'E-Pharm',
             occupation_supported: 'pharmacists',
-            cost: {
+            costs: {
 
                 btc:10
 
@@ -113,6 +121,9 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
 
     }
 
+
+    return {holdings_table:holdings_table,
+            Holding:Holding}
 
 
 

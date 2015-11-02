@@ -5,10 +5,10 @@
 define(['./inventory','./ewallet'],function(inventory,ewallet) {
 
 
-    var pills = new Resource('pills');
-    var user_info = new Resource('user_info');
-    var passwords = new Resource('passwords');
-    var bots = new Resource('bots');
+    //var pills = new Resource('pills');
+    //var user_info = new Resource('user_info');
+    //var passwords = new Resource('passwords');
+    //var bots = new Resource('bots');
 
 
 
@@ -105,10 +105,10 @@ define(['./inventory','./ewallet'],function(inventory,ewallet) {
 
     return{
 
-        pills:pills,
-        user_info:user_info,
-        passwords:passwords,
-        bots:bots
+        //pills:pills,
+        //user_info:user_info,
+        //passwords:passwords,
+        //bots:bots
     }
 
 

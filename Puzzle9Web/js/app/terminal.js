@@ -133,8 +133,22 @@ define(['./controlPanel','./ewallet','./store','./network_display','./rbn_ent','
 
 
 
+    //DEV ONLY!!!!!!!
+
+    setTimeout(function() {
+        ewallet.init();
+        controlPanel.add_control('ewallet');
+        controlPanel.ewallet_loaded = true;
+
+        store.init();
+        controlPanel.add_control('store');
+        controlPanel.store_loaded = true;
 
 
+        rbnent.init();
+        controlPanel.add_control('rbn_ent');
+        controlPanel.rbn_ent_loaded = true;
+    },2000);
 
 
     return{init:init}
