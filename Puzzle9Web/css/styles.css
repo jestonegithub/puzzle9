@@ -928,8 +928,7 @@ input[type="text"]:focus {
 }
 
 #mycomps_div{
-
-    float:left;
+    
     width:350px;
     margin-top:20px;
     padding-left:115px;
@@ -940,15 +939,30 @@ input[type="text"]:focus {
 #myoccupations_div{
 
     width:200px;
-    float:left;
+
     margin-top:20px;
+
+}
+
+#holding_content{
+
+    height:200px;
+    overflow-y: auto;
+
+}
+
+.holding_div{
+
+    display:block;
+    height:100px;
+
 
 }
 
 .holding_container{
 
     font-size:10px;
-    float:left;
+
     border: 1px solid white;
     padding-left: 5px;
     padding-right:5px;
@@ -957,9 +971,9 @@ input[type="text"]:focus {
 
 .buy_holding{
 
-    float:left;
+
     text-align:center;
-    margin-top:15px;
+
 
 }
 

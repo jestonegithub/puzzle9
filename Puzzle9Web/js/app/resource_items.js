@@ -28,13 +28,12 @@ define(['./inventory','./ewallet'],function(inventory,ewallet) {
         item_type: "Resource",
         available: true,
         register_resource: function(){
-
           inventory.register_item(this.resource_type)
-
         },
         add_resource: function (num_added) {
 
             this.num += num_added;
+            inventory.update_item(this.resource_type,this.num);
 
 
         },
@@ -52,9 +51,9 @@ define(['./inventory','./ewallet'],function(inventory,ewallet) {
 
     var resources_table = {
 
-        user_info: {
+        emails: {
 
-            name:'user data'
+            name:'emails'
         },
 
         pass: {
@@ -72,14 +71,19 @@ define(['./inventory','./ewallet'],function(inventory,ewallet) {
             name:'pills'
         },
 
-        trade_sec: {
+        trade: {
 
             name:'trade secrets'
         },
 
-        dip_intel: {
+        intel: {
 
             name:'foreign intel'
+
+        },
+        docs:{
+
+            name:'passports'
 
         },
 
@@ -103,12 +107,23 @@ define(['./inventory','./ewallet'],function(inventory,ewallet) {
     };
 
 
+    //resource instances
+    var emails = new Resource('emails');
+    var pass = new Resource('pass');
+    var pills = new Resource('pills');
+    var docs = new Resource('docs');
+    var intel = new Resource('intel');
+    var trade = new Resource('trade');
+
+
     return{
 
-        //pills:pills,
-        //user_info:user_info,
-        //passwords:passwords,
-        //bots:bots
+        emails:emails,
+        pass:pass,
+        pills:pills,
+        docs:docs,
+        trade:trade,
+        intel:intel
     }
 
 

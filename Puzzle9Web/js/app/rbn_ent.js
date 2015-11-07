@@ -84,14 +84,14 @@ define(['./controlPanel','./holdings','./workers','./inventory','./ewallet'],fun
 
         // this holds the company listings and occupations (as they are unlocked by rbn_actor)
 
-        $('#mycomps').append('<div id=mycomps_div class=mycomps_listing><p id="mycomps_title">Companies</p></div><div id=myoccupations_div class=myoccupations_listing><p id="myoccupations_title"></p></div>');
-
+        $('#mycomps').append('<div id="my_comps_header"><div id=mycomps_div class=mycomps_listing><p id="mycomps_title">Companies</p></div><div id=myoccupations_div class=myoccupations_listing><p id="myoccupations_title">Available Workers</p></div></div>');
+        $('#mycomps').append('<div id="holding_content"></div>');
 
 
 
         //handler for buy ads button
 
-        $('.btn,.ads').click(function(){
+        $('.btn.ads').click(function(){
             ads.buy_ads(worker);
         });
 
@@ -103,8 +103,12 @@ define(['./controlPanel','./holdings','./workers','./inventory','./ewallet'],fun
         $('#rbn_ent_div').hide();
 
 
-        //DEV ONLY
+        //TODO: DEV ONLY
         init_company('zyng');
+        init_company('epharm');
+        init_company('ezpaper');
+        init_company('press');
+
 
     };
 
@@ -120,63 +124,58 @@ define(['./controlPanel','./holdings','./workers','./inventory','./ewallet'],fun
 
         var new_comp = new holdings.Holding(holding_type);
 
-        $('#mycomps_div').append('<div class=holding_container>'+
-        '<div class=holding_title>'+new_comp['name']+'</div>'+
-        '<div class=holding_blurb>'+new_comp.blurb+'</div>'+
-        '<div class=holding_price></div>'+
+        $('#holding_content').append('<div class=holding_div>' +
+            '<div class=holding_container>'+
+                '<div class=holding_title>'+new_comp['name']+'</div>'+
+                '<div class=holding_blurb>'+new_comp.blurb+'</div>'+
+                '<div class=holding_price></div>'+
+            '</div>'+
+            '<div class=holding_action_div></div>'+
         '</div>'
         );
 
         //fill in costs (which could be multiple types of resources)
         for (var name in new_comp.costs) {
-            $('.holding_price').append('<p>'+name.toString()+': '+new_comp.costs[name].toString()+'</p>')
+            $('.holding_div').last().find('.holding_price').last().append('<p>'+name.toString()+': '+new_comp.costs[name].toString()+'</p>')
         }
 
-        $('#myoccupations_div').append('<button class="btn buy_holding">PURCHASE</button>');
+        $('.holding_div').last().find('.holding_action_div').append('<button class="btn buy_holding">PURCHASE HOLDING</button>');
 
 
 
         //handler for purchase companies button
-        $('#myoccupations_div,.btn').last().click(function(){
+        $('.holding_div').last().find('.btn').last().click(function(){
             new_comp.buy_holding();
             if (new_comp.purchased === true){
+
+                //determine which DIV we are in
+                var current_div = $(this).parent();
 
                 //add new occupation
                 var occup = new workers.Occupation(new_comp.occupation_supported);
 
                 // add html and handlers for new occupation
                 $(this).remove();
-                $('#myoccupations_div').append('<div class="myoccupations_container">' + new_comp.occupation_supported +
+                current_div.append('<div class="myoccupations_container">' + new_comp.occupation_supported +
                 '<div class=item_spinner_div><i class="spinner_elements fa fa-angle-left"></i><div class="spinner_elements item_number">' + occup.num_active.toString() + '</div><i class="spinner_elements fa fa-angle-right"></i>' +
                 '</div>');
 
 
                 //add handlers for spinners
-                $('#myoccupations_div,.myoccupations_container').last().find('.fa-angle-left').click(function(){
-
-
+                current_div.find('.fa-angle-left').click(function(){
                         occup.decrease_occupation(worker);
                         console.log(occup.num_active);
                         $(this).siblings('.item_number').text(occup.num_active.toString());
-
                 });
 
-                $('#myoccupations_div,.myoccupations_container').last().find('.fa-angle-right').click(function(){
-
+                current_div.find('.fa-angle-right').click(function(){
                         occup.increase_occupation(worker);
                         console.log(occup.num_active);
+                        console.log(worker.avail_workers);
                         $(this).siblings('.item_number').text(occup.num_active.toString());
-
                 });
-
-
-
-
-
             }
         })
-
-
     };
 
 
@@ -184,60 +183,6 @@ define(['./controlPanel','./holdings','./workers','./inventory','./ewallet'],fun
 
 
 
-    //for (var name in holdings.holdings_table) {
-    //
-    //    $('#mycomps_div').append('<div class=mycomps_listing>'+holdings.holdings_table[name]+'</div>');
-    //
-    //
-    //}
-    //
-
-    //// HANDLERS...
-    //
-    //
-    //
-    ////handlers for occupations
-    //
-    //$('#mycomps, .item_spinner_div').each(function () {
-    //
-    //    $(this).find('.fa-angle-left').click(function () {
-    //
-    //            if (ads['num_ads'] > 0) {
-    //
-    //
-    //                //add back cost to wallet
-    //                ewallet.change_dollars(items[item_id]['costs'][items[item_id]['current']]);
-    //                // increment item # and reset div display value
-    //                items[item_id].downgrade_server();
-    //                $(this).siblings('.item_number').text(items[item_id]['values'][items[item_id]['current']]);
-    //
-    //            }
-    //
-    //
-    //        }
-    //    );
-    //
-    //
-    //    $(this).find('.fa-angle-right').click(function () {
-    //
-    //
-    //            var item_id = $(this).parent().attr('data-id');
-    //
-    //            if  ((items[item_id]['current'] < 4) && (items[item_id]['costs'][items[item_id]['current']+1] <= ewallet.get_avail_dollars())) {
-    //
-    //                //add back cost to wallet
-    //                ewallet.change_dollars(-1 * items[item_id]['costs'][items[item_id]['current']+1]);
-    //                // increment item # and reset div display value
-    //                items[item_id].upgrade_server();
-    //                $(this).siblings('.item_number').text(items[item_id]['values'][items[item_id]['current']])
-    //
-    //
-    //            }
-    //        }
-    //    )
-    //
-    //
-    //});
 
 
 

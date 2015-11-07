@@ -100,7 +100,7 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
 
     var store_items = {
 
-        cloudawesome: {},
+        cloudawesome: {}
 
 
     };

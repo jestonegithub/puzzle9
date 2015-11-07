@@ -59,41 +59,26 @@ define ( function(){
     var start_time;
 
     var addToList = function(name,arr,update_interval,arg) {
-
         start_time=global_time;
         callBackList[name] = {callback: arr, start: start_time, interval: update_interval,arg:arg};
         console.log(callBackList);
-
-
     };
 
 
     var removeFromList = function(name) {
-
         delete callBackList[name];
-
     };
 
 
     // function that calls all callbacks in list
-
     var updater = function() {
-
         //update global time & game date
         global_time+=1;
         if (global_time%game_date_duration === 0){game_date+=1;} //increments day based on game_date_duration
 
-
-
-
         for (var name in callBackList) {
             if (callBackList.hasOwnProperty(name)) {
-
-
-
                 if ((global_time-callBackList[name]['start'])%callBackList[name]['interval'] === 0) {
-
-
                     if (callBackList[name]['arg'] != undefined) {
                     callBackList[name]['callback'](callBackList[name]['arg']);
                     }

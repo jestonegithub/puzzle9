@@ -12,9 +12,28 @@ define(['./ewallet'],function(ewallet) {
     var item_address = {
 
         bitcoin:[1,7],
-        dollar:[2,7],
-        ads:[3,7],
-        workers:[4,7]
+        dollar:[1,6],
+        ads:[1,3],
+        workers:[1,4],
+        emails:[2,7],
+        pass:[2,6],
+        trade:[2,5],
+        intel:[2,4],
+        pills:[3,7],
+        docs:[3,6],
+        exploits:[3,4],
+        chips:[3,3],
+        si:[3,2],
+        dict:[4,7],
+        bots:[4,6],
+        sniffer:[5,7],
+        ripper:[5,6],
+        deepcrack:[5,5],
+        quark:[5,4],
+        trojan:[6,7],
+        virus:[6,6],
+        rootkit:[6,5],
+        worm:[6,4]
 
     };
 
@@ -25,7 +44,26 @@ define(['./ewallet'],function(ewallet) {
       bitcoin:'btc',
         dollar:'usd',
         ads:'ads',
-        workers:'workers'
+        workers:'workers',
+        emails:'emails',
+        pass:'passwords',
+        trade:'trade secrets',
+        intel:'intel',
+        pills:'pills',
+        docs:'passports',
+        exploits:'exploits',
+        chips:'processors',
+        si:'silicon',
+        dict:'dictionaries',
+        bots:'bots',
+        sniffer:'port scanner',
+        ripper:'PassHack',
+        deepcrack:'DeepCrackR',
+        quark:'QuarkII',
+        trojan:'trojans',
+        virus:'viruses',
+        rootkit:'rootkits',
+        worm:'worms'
 
 
 

@@ -15,6 +15,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         this.blurb = holdings_table[holdings_type]['blurb'];
        // this.icon = holdings_table[holdings_type]['icon'];
         this.purchased = false;
+        this.registering_items = holdings_table[holdings_type]['registering_items'];
 
 
 
@@ -24,36 +25,44 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         constructor:Holding,
         item_type:"Holdings",
         available:true,
-        buy_holding: function(){
+        buy_holding: function() {
 
-            // need to loop through all the costs and check that they are available
-            for (var name in this.costs) {
-                if (this.costs.hasOwnProperty(name)) {
+            //check that sufficient funds are available
+            var sufficient_funds = check_funds(this.costs);
 
-                    // special case where its btc or dollars, which don't have methods
-                    if (name === 'btc' || name === 'dollars') {
 
-                        if (ewallet['get_avail_'+name]() >= this.costs[name]) {
-                            ewallet['change_'+name](-1*this.costs[name])
-                            this.purchased=true;
+            if (sufficient_funds === true) {
+                for (var name in this.costs) {
+                    if (this.costs.hasOwnProperty(name)) {
+
+                        // special case where its btc or dollars, which don't have methods
+                        if (name === 'btc' || name === 'dollars') {
+
+                            if (ewallet['get_avail_' + name]() >= this.costs[name]) {
+                                ewallet['change_' + name](-1 * this.costs[name])
+                                this.purchased = true;
+                            }
+
+                        } else {
+
+                            if (resourceitems[name]['num'] >= this.costs[name]) {
+                                resourceitems[name]['remove_resource'](this.costs[name])
+                                this.purchased = true;
+                            }
                         }
-
-                    }else{
-
-                        if (resourceitems[name]['num'] >= this.costs[name]) {
-                            resourceitems[name]['remove_resource'](this.costs[name])
-                            this.purchased=true;
-                        }
-
                     }
                 }
+
+
+                this.purchased = true;
+
+                for (i = 0; i < this.registering_items.length; i++) {
+                    console.log(this.registering_items[i]);
+                    resourceitems[this.registering_items[i]].register_resource()
+                }
+
+
             }
-        },
-
-        create_workers: function() {
-
-
-
 
         }
 
@@ -71,7 +80,8 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
                 btc:1
 
             },
-            blurb:'Addictive games with Adware.'
+            blurb:'Addictive games with Adware.',
+            registering_items:['emails','pass']
 
 
         },
@@ -82,20 +92,39 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
             name: 'E-Pharm',
             occupation_supported: 'pharmacists',
             costs: {
-
                 btc:10
+            },
+            blurb:'No prescriptions?  No problem.',
+            registering_items:['pills']
 
-            }
+
+        },
+
+        ezpaper: {
+
+            name: 'E-Z-Papers',
+            occupation_supported: 'clerks',
+            costs: {
+                btc:10
+            },
+            blurb:'Important documents when you need them.',
+            registering_items:['docs']
 
 
         },
 
-        anon: {
+        press:{
 
-            name: 'pseudo',
-            occupation_supported: 'activists'
+            name:'FreedomPress',
+            occupation_supported:'journalists',
+            costs: {
+                btc:10
+            },
+            blurb:'Liberate Information',
+            registering_items:['intel','trade']
 
         },
+
 
         safeware: {
 
@@ -119,8 +148,27 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
 
 
 
-    }
+    };
 
+
+    // Utility Functions
+
+    var check_funds = function(costs){
+        //checks that 'funds' (money or resources) are available for a purchase
+        for (var name in costs) {
+            if (costs.hasOwnProperty(name)) {
+                // special case where its btc or dollars, which don't have methods
+                if (name === 'btc' || name === 'dollars') {
+                    if (ewallet['get_avail_' + name]() < costs[name]) {return false}
+                } else {
+                    if (resourceitems[name]['num']() < costs[name]) {return false}
+                }
+            }
+        }
+
+        return true;
+
+    };
 
     return {holdings_table:holdings_table,
             Holding:Holding}

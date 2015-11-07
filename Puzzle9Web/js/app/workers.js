@@ -3,12 +3,12 @@
  */
 
 
-define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet,resourceitems) {
+define(['./inventory','./ewallet','./resource_items','./timer'],function(inventory,ewallet,resourceitems,timer) {
 
     // parameters
     var ads_cost_coeff = 1;
     var ad_worker_multiplier = 5;
-    var occupation_resource_interval = 10; //i.e., # of global units per resource update from workers
+    var occupation_resource_interval = 5; //i.e., # of global units per resource update from workers
     var worker_delay = 3000; //number of ms before workers are created for each new ad
 
 
@@ -51,15 +51,11 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         remove_ads: function(num_deleted) {
 
                 if (this.num_ads >= num_deleted){this.num_ads -= num_deleted}
-
-
         },
 
         update_workers: function(worker) {
 
                setTimeout(function(){worker.add_workers(5)},worker_delay);
-
-
         }
 
     };
@@ -82,29 +78,23 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         icon:"fa fa-user",
         available:true,
         add_workers: function(num){
-
                 this.num_workers += num;
+                this.avail_workers=this.num_workers-this.occupied_workers;
                 inventory.update_item('workers',this.num_workers);
 
         },
         remove_workers: function(num) {
-
             if (this.num_workers >= num){this.num_workers -= num}
-
         },
 
         add_occupied_workers: function(num_added) {
                 this.occupied_workers += num_added;
                 this.avail_workers=this.num_workers-this.occupied_workers;
         },
-
-
         remove_occupied_workers: function(num_removed) {
                 this.occupied_workers -= num_removed;
                 this.avail_workers=this.num_workers-this.occupied_workers;
         }
-
-
     };
 
 
@@ -117,6 +107,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         this.num_active = 0;
         this.sinks = occupations_table[occupation_type]['sinks'];
         this.sources = occupations_table[occupation_type]['sources'];
+        var self=this;
 
 
     };
@@ -127,67 +118,65 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
         item_type:"Occupation",
         available:true,
         increase_occupation:function(worker){
-            if (worker.avail_workers < this.max){
-            this.num_active += 1;
-            worker.add_occupied_workers(1);
+            if ((this.num_active < this.max) && (worker.avail_workers > 0)){
+                this.num_active += 1;
+                worker.add_occupied_workers(1);
+                if (this.num_active === 1){
+                    timer.addToList(this.occupation_type,this.update_resources.bind(this),occupation_resource_interval)}
             }
         },
         decrease_occupation: function(worker){
-            if (worker.avail_workers > 0) {
+            if (this.num_active > 0) {
                 this.num_active -= 1;
                 worker.remove_occupied_workers(1);
+                if (this.num_active === 0){timer.removeFromList(this.occupation_type)}
             }
 
         },
         update_resources: function() {
 
-            //register a function with timer that updates resources at resource interval
+                // NEEDS WORK!!!!!!!!!!!!!!!!!!!!!!!!
 
-            var resource_accounting = function() {
+                    // Need to do the following
+                   //   1 - check that all costs are met
+                   //   2- update cost resources
+                   //   3 - update gained resources
 
-                //for sinks (costs)
-                for (var name in this.sinks) {
-                    if (this.sinks.hasOwnProperty(name)) {
 
-                        // special case where its btc or dollars, which don't have methods
-                        if (name === 'btc' || name === 'dollars') {
+                // this is probably very inefficient, but for now just going to look through costs/sinks for each number active for occupation
+                for (i=0;i<this.num_active;i++) {
 
-                            if (ewallet['get_avail_'+name] >= this.sinks[name]) {ewallet['change_'+name](-1*this.sinks[name])}
+                    // check for sufficient funds
+                    var sufficient_funds=check_funds(this.sinks);
 
-                        }else{
+                    if (sufficient_funds === true) {
+                        //for sinks (costs)
+                        for (var name in this.sinks) {
+                            if (this.sinks.hasOwnProperty(name)) {
+                                // special case where its btc or dollars, which don't have methods
+                                if (name === 'btc' || name === 'dollars') {
+                                        ewallet['change_' + name](-1 * this.sinks[name])
+                                } else {
+                                        resourceitems[name]['remove_resource'](this.sinks[name])
+                                }
+                            }
+                        }
+                        //for sources (gained resources)
+                        for (var name in this.sources) {
+                            if (this.sources.hasOwnProperty(name)) {
 
-                            if (resourceitems[name]['num'] >= this.sinks[name]) {resourceitems[name]['remove_resource'](this.sinks[name])}
-
+                                // special case where its btc or dollars, which don't have methods
+                                if (name === 'btc' || name === 'dollars') {
+                                        ewallet['change_' + name](this.sources[name])
+                                } else {
+                                        console.log(name,resourceitems[name]['add_resource']);
+                                        resourceitems[name]['add_resource'](this.sources[name])
+                                }
+                            }
                         }
                     }
                 }
-
-
-                //for sources (gained resources)
-
-                for (var name in this.sources) {
-                    if (this.sources.hasOwnProperty(name)) {
-
-                        // special case where its btc or dollars, which don't have methods
-                        if (name === 'btc' || name === 'dollars') {
-
-                            if (ewallet['get_avail_'+name] >= this.sources[name]) {ewallet['change_'+name](this.sources[name])}
-
-                        }else{
-
-                            if (resourceitems[name]['num'] >= this.sources[name]) {resourceitems[name]['add_resource'](this.sources[name])}
-
-                        }
-                    }
-                }
-
-
-
             }
-
-
-        }
-
     };
 
 
@@ -201,24 +190,51 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
 
           max: 10,
           sinks:{
-
               dollars:10
-
           },
           sources:{
 
-            user_info:10,
-            passwords:10,
-            bots: 10
+            btc:1,
+            emails:5,
+            pass:10
+
 
           }
-
-
       },
 
-      pharmacists: {},
+      pharmacists: {
+          max: 10,
+          sinks:{
+              dollars:10
+          },
+          sources:{
+              pills:10
+          }
+      },
 
-        activists: {},
+        clerks:{
+          max:10,
+            sinks:{
+                dollars:10
+            },
+            sources:{
+                passports:1
+            }
+        },
+
+        journalists: {
+            max:10,
+            sinks:{
+                dollars:10
+            },
+            sources:{
+                intel:1,
+                trade:1
+            }
+
+
+
+        },
 
         researchers: {},
 
@@ -226,6 +242,26 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
 
         engineers: {}
 
+
+    };
+
+
+    // Utility Functions
+
+    var check_funds = function(costs){
+        //checks that 'funds' (money or resources) are available for a purchase
+        for (var name in costs) {
+            if (costs.hasOwnProperty(name)) {
+                // special case where its btc or dollars, which don't have methods
+                if (name === 'btc' || name === 'dollars') {
+                    if (ewallet['get_avail_' + name]() < costs[name]) {return false}
+                } else {
+                    if (resourceitems[name]['num']() < costs[name]) {return false}
+                }
+            }
+        }
+
+        return true;
 
     };
 

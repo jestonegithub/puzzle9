@@ -62,6 +62,11 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
 
        $('#ewallet_div').hide();
 
+
+       //TODO:  DEV ONLY
+       change_btc(100);
+       change_dollars(100);
+
       // chart.init();
 
 
@@ -77,7 +82,7 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
     var change_btc = function(btc_delta){
 
         currency.btc += btc_delta;
-        console.log(currency.btc);
+
         inventory.update_item('bitcoin',currency.btc);
 
     };
@@ -86,7 +91,7 @@ define(['./mine','./trade','./inventory'],function(mine,trade,inventory) {
     var change_dollars = function(dollars_delta) {
 
       currency.dollars += dollars_delta;
-        console.log(currency.dollars);
+
         inventory.update_item('dollar',currency.dollars);
 
     };
