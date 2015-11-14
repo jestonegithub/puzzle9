@@ -2,7 +2,7 @@
  * Created by jessebstone on 9/29/15.
  */
 
-define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
+define(['./ewallet','bootstrap','./mine','./resource_items'],function(ewallet,bootstrap,mine,resourceitems) {
 
 
     var init = function(){
@@ -37,6 +37,21 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
     };
 
 
+    var init_royalroad = function(){
+
+        add_site("Royal Road",'royalroad');
+
+
+    };
+
+
+
+
+
+    var init_operation137 = function(){};
+
+
+
     var add_site = function(bookmark,site) {
 
 
@@ -46,21 +61,15 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
 
     };
 
-    var init_forums = function(){
-
-
-        //store_items.rbn_forums['users']=
-
-
-    };
+  
 
 
 //  STORE SITES ------------------------------------------------------------------
 
     var links = {
 
-      cloudawesome:"www.cloudawesome.com"
-
+      cloudawesome:"www.cloudawesome.com",
+        royalroad:"http://7hd3rr9347.onion"
 
     };
 
@@ -93,14 +102,58 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
                 load_store_items('cloudawesome');
 
             }
+        },
+
+        royalroad:{
+
+            load: function(){
+
+                $('#store_content_area').append('<div id=royalroad_div><div id=rr_title>Royal Road</div><div class=items_div></div></div></div>');
+
+
+
+
+
+
+            }
+
+
+
+
         }
+
+
 
     };
 
 
     var store_items = {
 
-        cloudawesome: {}
+        cloudawesome: {},
+
+        royalroad:{
+
+            hackerware:{},
+            //sniffer:{},
+            //ripper:{},
+            pills:{} //,
+            //chips:{},
+            //address:{},
+            //docs:{}
+
+        },
+
+        operation137:{
+
+            quark:{},
+            virus:{},
+            trojan:{},
+            deepcrack:{},
+            rootkit:{},
+            bots:{}
+
+
+        }
 
 
     };
@@ -132,15 +185,70 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
 
                     // This is for non-cloud awesome stuff
                     $('.items_div').append('<div class="item_container">' +
-                    '<div class="item_icon_container"><i class="item_icons ' + items[name]['icon'] + '"></i></div>' +
-                    '<div class="item_name">' + items[name]['name'] + '</div>' +
-                    '<div class="item_cost">' + items[name]['cost'] + " " + items[name]['cost_type'] + '</div>' +
-                    '<div class="item_spinner_div" data-id=' + items[name]['id'] + '><i class="spinner_elements fa fa-angle-left"></i><div class="spinner_elements item_number">' + items[name]['num_active'] + '</div><i class="spinner_elements fa fa-angle-right"></i>' +
+                    '<div class="item_name">' + items[name]['name'] + '</div><div class=item_batch>( '+ items[name]['batch_num'] +' )</div>'+
+                    '<div class=item_blurb>' + items[name]['blurb'] + '</div>'+
+                    '<div class="item_cost"></div>' +
+                    '<div class=item_purchase_div><button class="btn buy_item">PURCHASE ITEM</button></div>'+
                     '</div>');
 
+                    //fill in costs (which could be multiple types of resources)
+                    for (var name2 in items[name].costs) {
+                        $('.item_container').last().find('.item_cost').last().append('<p>'+name2.toString()+': '+items[name]['costs'][name2].toString()+'</p>')
+                    }
 
+
+                    $('.item_container').last().find('.btn').last().click(function(){
+
+                        var this_item = items[name];
+
+                            //check that sufficient funds are available
+                            var sufficient_funds = check_funds(this_item.costs);
+
+
+                            if (sufficient_funds === true) {
+                                //takes away cost resources/currency
+                                for (var name3 in this_item.costs) {
+                                    if (this_item['costs'].hasOwnProperty(name3)) {
+
+                                        // special case where its btc or dollars, which don't have methods
+                                        if (name3 === 'btc' || name3 === 'dollars') {
+
+                                            if (ewallet['get_avail_' + name3]() >= this_item.costs[name3]) {
+                                                ewallet['change_' + name3](-1 * this_item.costs[name3])
+                                            }
+
+                                        } else {
+
+                                            if (resourceitems[name3]['num'] >= this_item.costs[name]) {
+                                                resourceitems[name3]['remove_resource'](this_item.costs[name3])
+                                            }
+                                        }
+                                    }
+                                }
+
+                              //now purchase the item - this depends on whether it's a resource or an upgrade
+                              if (this_item.cat === 'resource') {
+
+                                resourceitems[name]['add_resource'](this_item['batch_num']);}
+
+                              else{
+
+                                  this_item.purchase_tool();
+                                  $(this).remove();
+
+                              }
+
+
+
+                            }
+
+                    })
 
                 }
+
+
+
+
                 else{
 
 
@@ -166,6 +274,10 @@ define(['./ewallet','bootstrap','./mine'],function(ewallet,bootstrap,mine) {
         //attach purchasing functionality to the item spinners
 
         if (site !='cloudawesome'){
+
+
+
+
 
         }
         else {

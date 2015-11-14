@@ -8,6 +8,7 @@ define(['./ewallet','bootstrap','./mining_control'],function(ewallet,bootstrap,m
     // These are items that are upgrades to some existing game object - they cannot be transferred (but can be sold back in some cases)
 
 
+    // Server instances are created and managed in store - as cloudawesome is only element that uses them
     function Server(id) {
 
         this.current = 0;
@@ -50,6 +51,16 @@ define(['./ewallet','bootstrap','./mining_control'],function(ewallet,bootstrap,m
 
 
     };
+
+
+
+
+
+
+
+
+
+
 
 
     return{Server:Server}
