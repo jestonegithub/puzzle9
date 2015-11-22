@@ -1,0 +1,63 @@
+#color_finder{
+
+    color: #572c94;
+
+}
+
+/* META Styles: Body, game_wrapper, game_menu and start screen - stuff that's 'meta' to the game's desktop environment  */
+
+body {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100%;
+    width:100%;
+    display:table;
+    background-color: #424345;
+}
+
+
+#title_circle{
+
+    height:600px;
+    width:600px;
+    margin: 0 auto;
+    font-size: 100px;
+    font-family: 'Raleway', sans-serif;
+    font-weight:100;
+}
+
+
+#start_button{
+
+    height:200px;
+    width:200px;
+    margin: 0 auto;
+    font-size:18px;
+    font-family: 'Raleway', sans-serif;
+    font-weight:100;
+    cursor:pointer;
+
+}
+
+
+#game_menu {
+
+    position:fixed;
+    right:10px;
+    bottom:10px;
+    color:white;
+
+}
+
+
+#game_wrapper {
+
+    font-family: sans-serif;
+    position: relative;
+    width: 920px;
+    height: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    /*border: 1px solid black;*/
+}
