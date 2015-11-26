@@ -16,7 +16,7 @@ requirejs.config({
         text:'../text',
         marionette:'backbone.marionette',
         underscore:'underscore',
-        hbs: 'lib/require-handlebars-plugin/hbs'
+        hbs: 'hbs'
         //jquery:'jquery-1.7.min.js'
     },
     shim: {

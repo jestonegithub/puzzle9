@@ -8,6 +8,7 @@ define(function (require) {
     var sv = require('./views/meta_views/startView');
     var lv = require('./views/meta_views/loadOSView');
     var gmv = require('./views/meta_views/gamemenuView');
+    var osv = require('./views/osLayoutView');
 
 
 
@@ -42,10 +43,12 @@ define(function (require) {
             //loadOS just shows a loading progress(circle) - no logic
             this.loadOSview = new lv.LoadOSView();
 
-            //next we will instantiate the OS model and the OS view (i.e., Cryptonite OS, the main game view)
+            //next we will instantiate the OS model and the OS view (i.e., Cryptonite OS, the main game view) - and append it to the DOM only after 'loadOS' sequence has ended
+            //  the OS view is going to be the 'root view' of the game. It will live in #main, which is a 900x720 DIV (or whatever the dimensions end up being)
 
-            //this.osview = new ov.OSView();
+            this.oslayoutview = new osv.OSLayoutView().render();
 
+            this.oslayoutview.listenTo(this.loadOSview,'loadOSEnd', this.oslayoutview.append_layout);
 
         },
 

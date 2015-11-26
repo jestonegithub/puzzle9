@@ -16,6 +16,8 @@ define(function (require) {
 
         initialize:function() {
 
+            var current_view = this;
+
             setTimeout(function(){
             console.log('loading sequence');
             $('#start_button').css('margin-top', '300px');
@@ -27,8 +29,10 @@ define(function (require) {
             });
             start_button.animate(1, {duration: 3000}, function () {
                 $('#start_button').remove();
+                current_view.trigger('loadOSEnd');
             });
                 },load_gap);
+
         }
 });
 

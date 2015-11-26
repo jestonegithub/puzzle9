@@ -1,0 +1,86 @@
+
+#inventory {
+
+    position:relative;
+    height:265px;
+    width:920px;
+
+}
+
+
+
+#money_panel {
+
+    position:relative;
+    height:35px;
+    width:144px;
+    float:left;
+    margin-left: 8px;
+    height:30px;
+
+}
+
+
+#control_panel{
+
+    position:relative;
+    height:35px;
+    width:300px;
+    float:left;
+
+}
+
+#inventory_menu{
+
+    position:relative;
+    float:left;
+    min-width:466px;
+    height:35px;
+    /*border:1px solid black;*/
+
+}
+
+#rainmeter{
+
+    position:relative;
+    float:left;
+    height:420px;
+    width:920px;
+    border: 3px solid rgb(254, 254, 254);
+
+}
+
+#rainmeter_image{
+
+    position:absolute;
+    object-fit: cover;
+    height:413px;
+    width:912px;
+
+}
+
+#activity{
+
+    position:relative;
+    float:left;
+    height:420px;
+    width:610px;
+    font-family: 'Raleway', sans-sarif;
+    font-weight: 100;
+}
+
+#feed{
+
+    position:relative;
+    float:left;
+    width:304px;
+    height:414px;
+    background-color: rgba(37, 37, 37, 0.70);
+    /*border-left: 3px solid rgb(255, 255, 255);*/
+    /*background-color: rgba(13, 46, 63, 0.60);*/
+    font-family: 'Open Sans', sans-serif;
+    border-left:1px solid lightgrey;
+    /*font-family: Arial;*/
+
+
+}
