@@ -14,12 +14,16 @@ define(function (require) {
 
         template: os_tmpl,
 
+        id: "game_wrapper",
+
         regions: {
             inventory: "#inventory",
+            region1:'#region1', //doubles for resources and terminal during hacking
+            tools:'#tools',
             panels: "#panels",
             money_panel: '#money_panel',
-            inventory_menu: '#inventory_menu',
             control_panel: '#control_panel',
+            rainmeter: '#rainmeter',
             activity: '#activity',
             feed: '#feed'
 
@@ -30,6 +34,11 @@ define(function (require) {
             $('#main').append(this.el);
 
         }
+
+
+
+
+
 
 
     });

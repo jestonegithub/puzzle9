@@ -6,6 +6,7 @@
 //     MAYBE I'll update it later.
 
 define(function (require) {
+    var bb = require('backbone');
     var mn = require('marionette');
     var progressbar = require('progressbar');
 
@@ -27,7 +28,7 @@ define(function (require) {
                     $('#title_circle').remove();
                     $('#start_button').hide();
                     start_button.destroy();
-                    current_view.trigger('sequenceend');
+                    bb.trigger('sequenceend');
                 });
             });
 

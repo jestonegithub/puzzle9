@@ -1,4 +1,6 @@
 
+/*INVENTORY STYLES*/
+
 #inventory {
 
     position:relative;
@@ -8,37 +10,152 @@
 }
 
 
+#region1{
+
+    position:relative;
+    height:265px;
+    width:458px;
+    float:left;
+
+}
+
+.inventory_box{
+
+    float:left;
+    color:white;
+    height:30px;
+    width:144px;
+    margin-left:8px;
+    margin-top:7px;
+    font-size:16px;
+
+}
+
+/*.............RESOURCE SPECIFIC*/
+
+
+#resources_div{
+
+    position:relative;
+    height:265px;
+    width:458px;
+    float:left;
+
+}
+
+.active_resource {
+
+    background-color: rgb(250, 69, 76);
+    height:30px;
+    width:144px;
+    border:1px solid white;
+
+}
+
+.resource_name{
+
+    position:relative;
+    float:left;
+    padding:5px;
+    border-right:1px solid white;
+
+}
+
+.resource_value{
+
+    position:relative;
+    float:right;
+    padding:5px;
+
+}
+
+
+/*.............TOOL SPECIFIC*/
+
+#tools{
+
+    position:relative;
+    height:265px;
+    width:458px;
+    float:left;
+
+}
+
+
+
+
+
+
+
+
+/*MONEY PANEL STYLES*/
 
 #money_panel {
 
     position:relative;
     height:35px;
-    width:144px;
+    width:600px;
     float:left;
     margin-left: 8px;
-    height:30px;
 
 }
 
+.currency_box{
+
+    float:left;
+    color:white;
+    height:30px;
+    width:144px;
+    margin-left:8px;
+    margin-top:7px;
+    font-size:16px;
+
+}
+
+.active_currency{
+
+    background-color: rgb(250, 69, 76);
+    height:30px;
+    width:144px;
+    border:1px solid white;
+
+}
+
+
+
+/*CONTROL PANEL STYLES*/
 
 #control_panel{
 
     position:relative;
     height:35px;
-    width:300px;
+    width:310px;
     float:left;
 
 }
-
-#inventory_menu{
+.cntrl_box {
 
     position:relative;
+    height:inherit;
+    width:60px;
     float:left;
-    min-width:466px;
-    height:35px;
-    /*border:1px solid black;*/
 
 }
+
+.control_icons {
+
+    width:50px;
+    text-align: center;
+    float:right;
+    color: #dee0e3;
+    font-size: 30px;
+    cursor: pointer;
+
+}
+
+
+
+/*RAINMETER STYLES*/
 
 #rainmeter{
 
@@ -59,15 +176,52 @@
 
 }
 
+
+#os_label{
+
+    margin-top:80px;
+    position:absolute;
+    width:200px;
+    font-family: 'Raleway', sans-sarif;
+}
+
+#os_text1 {
+
+    display:inline;
+    margin-left:20px;
+    font-size: 25px;
+    width:100px;
+    float:left;
+    color: #4488c0;
+
+}
+
+#os_text2{
+
+    display:inline;
+    margin-left:20px;
+    font-size:25px;
+    width:40px;
+    float:left;
+    color: #bccbf9;
+
+}
+
+/*ACTIVITY STYLES*/
+
 #activity{
 
     position:relative;
     float:left;
     height:420px;
-    width:610px;
+    width:608px;
     font-family: 'Raleway', sans-sarif;
     font-weight: 100;
 }
+
+
+
+/*FEED STYLES*/
 
 #feed{
 
@@ -76,11 +230,96 @@
     width:304px;
     height:414px;
     background-color: rgba(37, 37, 37, 0.70);
-    /*border-left: 3px solid rgb(255, 255, 255);*/
-    /*background-color: rgba(13, 46, 63, 0.60);*/
     font-family: 'Open Sans', sans-serif;
     border-left:1px solid lightgrey;
-    /*font-family: Arial;*/
+
+}
 
 
+
+#feed_header {
+
+    font-size:18px;
+    color:white;
+    height:40px;
+    padding-left:15px;
+    padding-top:8px;
+
+
+}
+
+.fa-twitter{
+
+    font-size:24px;
+    color: #fefefe;
+    position:relative;
+    float:left;
+    width:30px;
+
+}
+
+
+#feed_title1{
+
+    position:relative;
+    float:left;
+    width:70px;
+    height:30px;
+    font-weight: 100;
+    margin-left:15px;
+    color: #838383;
+
+
+}
+
+
+
+#feed_content {
+
+    font-size:14px;
+    color: #fefefe;
+    margin-top:10px;
+    margin-left: 15px;
+    overflow: hidden;
+
+}
+
+.handle {
+
+    display:inline;
+    color: #dadada;
+
+}
+
+.tweet_content {
+
+    display:inline;
+
+
+}
+
+.notification {
+
+    margin-bottom: 10px;
+    min-height:0px;
+    border-bottom:1px solid white;
+
+}
+
+#notifyGradient {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    /*background-color: white;*/
+    /*background: -webkit-linear-gradient(*/
+    /*rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%*/
+    /*);*/
+    /*background: linear-gradient(*/
+    /*rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%*/
+    /*);*/
+    /*filter: alpha(*/
+    /*Opacity=0, FinishOpacity=100, Style=1, StartX=0, StartY=0, FinishX=0, FinishY=500*/
+    /*);*/
 }

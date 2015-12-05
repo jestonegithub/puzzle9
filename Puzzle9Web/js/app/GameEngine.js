@@ -2,13 +2,21 @@
  * Created by jessebstone on 11/16/15.
  */
 
+var tester = {};  //creating a global object that GameEngine instance will attach to so I can do manual calls for testing...
 
 define(function (require) {
+    var _ = require('underscore');
+    var bb = require('backbone');
     var mn = require('marionette');
     var sv = require('./views/meta_views/startView');
     var lv = require('./views/meta_views/loadOSView');
     var gmv = require('./views/meta_views/gamemenuView');
     var osv = require('./views/osLayoutView');
+    var rm = require('./models/resourceModel');
+    var rlv = require('./views/resourcesLayoutView');
+    var riv = require('./views/resourceItemView');
+    var cm = require('./models/currencyModel');
+
 
 
 
@@ -24,6 +32,8 @@ define(function (require) {
 
     var GameEngine = mn.Application.extend({
 
+
+
         initialize:function(){
 
             //TODO:check for saved data and initiate actions necessary to load app accordingly...for now assume none
@@ -33,33 +43,126 @@ define(function (require) {
 
         },
 
+
         goToStart:function(){
             //loads the stand-alone start screen (no associated model) - loadOS method is then called upon custom event firing indicating startsequence over
             this.startview = new sv.StartView();
-            this.startview.on('sequenceend',this.loadOS);
+
         },
 
         loadOS:function(){
+
+
             //loadOS just shows a loading progress(circle) - no logic
             this.loadOSview = new lv.LoadOSView();
 
             //next we will instantiate the OS model and the OS view (i.e., Cryptonite OS, the main game view) - and append it to the DOM only after 'loadOS' sequence has ended
             //  the OS view is going to be the 'root view' of the game. It will live in #main, which is a 900x720 DIV (or whatever the dimensions end up being)
 
-            this.oslayoutview = new osv.OSLayoutView().render();
+            //Here we load all the models and views that are necessary to run the basic OS features - we also load models for all resources, tools (not yet available) and
+            //    and currency
 
-            this.oslayoutview.listenTo(this.loadOSview,'loadOSEnd', this.oslayoutview.append_layout);
+            //load in MODELS
+            //  Resources and currency/prices (placeholder for price only) - TODO: add tool models
+            this.resources = rm.Resources; // to reduce clutter in GameEngine, object of all resources is loaded within resourceModel module and exported to here
+            var btc_currency = new cm.CurrencyModel({name:'bitcoin',symbol:'btc'});
+            var usd_currency = new cm.CurrencyModel({name:'dollars',symbol:'usd'});
+
+
+
+            //creating overall oslayout view; append to DOM and then HIDE until load animation has ended
+
+            this.oslayoutview = new osv.OSLayoutView().render();
+            this.oslayoutview.append_layout();
+            $('#game_wrapper').hide();
+
+
+            //create VIEWS: for resources to go in region1 of the OSlayoutview, tools (TBD), currencies, control panel and feed - and OSlayout view
+
+            //resource views
+            this.resourceslayoutview = new rlv.ResourcesLayoutView();
+            this.resourceslayoutview.render();
+            this.oslayoutview.region1.show(this.resourceslayoutview);
+
+
+            //TODO: tool views
+
+
+
+
+            // the TERMINAL already exists on starting up OS - so we add a new terminal model and view for it
+            this.terminalModel = new conm.TerminalModel();
+            this.terminalView = new conv.ConsoleView({model:this.terminalModel});
+
+
+            this.listenTo(this.loadOSview,'loadOSEnd', function(){
+                $('#game_wrapper').show();
+                bb.trigger('OSrunning');
+            });
+
+
+
+            // TESTING
+            tester.resources = this.resources;
+
 
         },
 
         loadOS_saved:function(){
 
             // This may be used when there is an existing game saved
+            console.log('test');
 
         },
 
-        showOS:function(){
-            //now we 'show' the OS
+
+        //CONTROL PANEL STUFF
+
+
+        initialize_control_buttons:function(){
+
+            $('#home_btn_box').click(_.bind(function(){
+                console.log('closing any open view in #activity');
+                this.oslayoutview.activity.empty();
+
+
+            },this));
+
+            $('#terminal_btn_box').click(function(){
+                console.log('toggling terminal window in #activity');
+
+
+
+            });
+
+
+        },
+
+
+
+
+
+        add_control_button: function(){
+
+
+
+
+        },
+
+
+
+
+
+        inventory_init: function(){
+
+            //this loads in the resources into
+
+
+            //this.resourcescollection = new rc.ResourcesCollection();
+
+
+
+
         },
 
 
@@ -73,11 +176,30 @@ define(function (require) {
     var game = new GameEngine();
 
     game.on('start',function(){
-        if (savedgame === false){game.goToStart();}
+        if (savedgame === false){
+            game.goToStart();
+        }
         else{}
     });
 
+    bb.on('sequenceend',_.bind(game.loadOS,game));
+
+    // call some more initalizing stuff around start-up
+    bb.on('OSrunning',function(){
+
+        //attaching handlers to the HOME and TERMINAL control buttons
+        game.initialize_control_buttons();
+
+    });
+
+
+
+
     game.start();
+
+
+
+
 
 
 
