@@ -10,7 +10,7 @@ define(function (require) {
     // This is a MOCK VIEW - meaning it doesn't do what a Marionette (or backbone) view does - its just a kluge of UI because, well, its just a transition screen.
     //   MAYBE I'll update it later.
 
-    var load_gap = 2000;  //ms to wait before starting load screen - just for effect
+    var load_gap = 500;  //ms to wait before starting load screen - just for effect
 
     var LoadOSView = mn.View.extend({
 
@@ -27,7 +27,7 @@ define(function (require) {
                 color: '#FCB03C',
                 text: {value: 'Connecting to Remote Desktop'}
             });
-            start_button.animate(1, {duration: 3000}, function () {
+            start_button.animate(1, {duration: 1000}, function () {
                 $('#start_button').remove();
                 current_view.trigger('loadOSEnd');
             });

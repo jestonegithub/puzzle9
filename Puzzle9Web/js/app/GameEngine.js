@@ -14,8 +14,9 @@ define(function (require) {
     var osv = require('./views/osLayoutView');
     var rm = require('./models/resourceModel');
     var rlv = require('./views/resourcesLayoutView');
-    var riv = require('./views/resourceItemView');
     var cm = require('./models/currencyModel');
+    var tiv = require('./views/terminalItemView');
+    var tm = require('./models/terminalModel');
 
 
 
@@ -90,9 +91,9 @@ define(function (require) {
 
 
 
-            // the TERMINAL already exists on starting up OS - so we add a new terminal model and view for it
-            this.terminalModel = new conm.TerminalModel();
-            this.terminalView = new conv.ConsoleView({model:this.terminalModel});
+            //// the TERMINAL already exists on starting up OS - so we add a new terminal model
+            this.terminalModel = new tm.TerminalModel({input_form_id:"#user_input"});
+            //this.terminalView = new tiv.TerminalItemView({model:this.terminalModel});
 
 
             this.listenTo(this.loadOSview,'loadOSEnd', function(){
@@ -128,12 +129,16 @@ define(function (require) {
 
             },this));
 
-            $('#terminal_btn_box').click(function(){
+            $('#terminal_btn_box').click(_.bind(function(){
+
+
+                this.oslayoutview.activity.show(new tiv.TerminalItemView({model:this.terminalModel}));
+
                 console.log('toggling terminal window in #activity');
 
 
 
-            });
+            },this));
 
 
         },

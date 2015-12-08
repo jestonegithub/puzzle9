@@ -16,7 +16,7 @@ define(function (require) {
 
             $('#main').append('<div id=title_circle></div><div id=start_button></div>');
 
-             var title_circle = new progressbar.Circle('#title_circle', {strokeWidth: 2,color: '#572c94', text:{value:'Puzzle9'},
+             var title_circle = new progressbar.Circle('#title_circle', {strokeWidth: 2,color: '#572c94', text:{value:'Script9'},
                  fill: 'rgba(255,255,255,1)'});
 
              var start_button = new progressbar.Circle('#start_button', {strokeWidth:1, color:'#572c94',text:{value:'Start Game'},fill:'#ffffff'});

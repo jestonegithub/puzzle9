@@ -5,7 +5,7 @@
 define(function (require) {
     var bb = require('backbone');
     var mn = require('marionette');
-    var pm = require('programModel');
+    var pm = require('./programModel');
 
 
 
@@ -15,28 +15,12 @@ define(function (require) {
         //all terminals have: title bar, text display area and text input area
         defaults:{
 
-            title_bar:"console",
-            input_handle:"user",
-            input_form_id:"#form_input"
+            //title_bar:"console",
+            //input_handle:"user",
+            //input_form_id:"#form_input"
             //display_packets - no default: all consoles load in a file with various automated responses to be displayed based on input commands
 
-        },
-
-
-        //INPUT RELATED
-        //get input - returns input from corresponding form id
-        get_input:function(){
-
-            return $(this.input_form_id).val();
-
-        },
-
-        parse_input:function(){
-
-            //override this
-
         }
-
     });
 
 
