@@ -5,11 +5,17 @@
 define(function (require) {
     var mn = require('marionette');
     var term_tmpl = require('hbs!app/templates/terminalView');
+    var cmv = require('./consoleItemView');
 
 
-    var TerminalItemView = mn.ItemView.extend({
+    var TerminalItemView = cmv.ConsoleItemView.extend({
 
         initialize:function(){
+
+            //set input and display IDs for TERMINAL
+            this.input_form_id='#user_input';
+            this.console_display_id='#terminal_display';
+
 
             var form_id = this.input_form_id;
             var this_model = this.model;
@@ -39,14 +45,16 @@ define(function (require) {
             });
         },
 
-        input_form_id: '#user_input',
+
 
         template: term_tmpl,
 
         className:"terminal",
 
         modelEvents: {
-            //TBD
+
+            'installing_wallet':'printToScreen'
+
         }
 
     });

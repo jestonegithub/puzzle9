@@ -19,7 +19,8 @@ define(function (require) {
         defaults:{
 
             my_region:"#activity", //may or may not be useful for terminal to know where in OS layout it is (what region)
-            current_command:""
+            current_command:"",
+            current_packet:{}
 
         },
 
@@ -43,7 +44,7 @@ define(function (require) {
 
             //call appropriate action function using dict.
             if (this.action[input] != undefined) {
-                this.action[input]();
+                _.bind(this.action[input],this)();
             }else{
                 console.log('command not found')
             }
@@ -59,21 +60,45 @@ define(function (require) {
 
             //'sudo apt-get install _____'
                 "bit":function(){
+
+                    //this is the actual installation file
+                    var install=function(){
+
+                        console.log('wallet has been installed...or has it?')
+
+                    };
+
+
+                    this.set({'current_packet':install_packets.wallet});
+
                     //- check that action hasn't already been done...
-                    if (this.install_list.wallet === false){return}
-                    console.log('installing wallet');
+                    if (this.install_list.wallet === false){
+                        console.log('installing wallet');
 
+                        bb.on('wallet_install_display_complete', _.bind(install,this));
 
-
-
+                        this.trigger('installing_wallet');
+                    }
+                    else{return}
                     this.install_list.wallet = true;
-
                 }
             }
-
-
     });
 
+
+    var install_packets={
+
+
+        wallet:{
+            packet_data:['testing this print stuff out...',
+                'testing this print stuff out more...',
+                '...and more'],
+            packet_type:'multi',
+            packet_delay:1000
+        }
+
+
+    };
 
 
 

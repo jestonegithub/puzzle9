@@ -21,6 +21,7 @@ define(function (require) {
             //display_packets - no default: all consoles load in a file with various automated responses to be displayed based on input commands
 
         }
+
     });
 
 
