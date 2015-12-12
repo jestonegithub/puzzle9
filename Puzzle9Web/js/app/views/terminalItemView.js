@@ -15,13 +15,15 @@ define(function (require) {
             //set input and display IDs for TERMINAL
             this.input_form_id='#user_input';
             this.console_display_id='#terminal_display';
-
+            this.command_line_handle_id = '#command_line_user';
 
             var form_id = this.input_form_id;
             var this_model = this.model;
 
             // the view is first created and THEN appended to DOM by region, so have to wait for 'show' event to fire before attaching these various handlers, etc.
             this.on('show',function() {
+
+                this.printBuffer();
 
                 //hiding the submit button - only want ENTER to be the way to submit commands (what console has a 'submit' button?!)
                 $("#console_submit").hide();
@@ -53,7 +55,8 @@ define(function (require) {
 
         modelEvents: {
 
-            'installing_wallet':'printToScreen'
+            'change:current_packet':'printToScreen',
+            'change:command_line_handle':'changeCommandHandle'
 
         }
 

@@ -125,27 +125,31 @@ define(function (require) {
             $('#home_btn_box').click(_.bind(function(){
                 console.log('closing any open view in #activity');
                 this.oslayoutview.activity.empty();
+                this.terminalModel.set({'open': false});
 
 
             },this));
 
+
             $('#terminal_btn_box').click(_.bind(function(){
 
-
-                this.oslayoutview.activity.show(new tiv.TerminalItemView({model:this.terminalModel}));
-
-                console.log('toggling terminal window in #activity');
-
-
-
+                if(this.terminalModel.get('open') === false) {
+                    this.oslayoutview.activity.show(new tiv.TerminalItemView({model: this.terminalModel}));
+                    this.terminalModel.set({'open': true});
+                    console.log('opening terminal window in #activity');
+                }
             },this));
 
 
         },
 
+        freeze_control_buttons:function(){
+
+          $('#home_btn_box').off('click');
+          $('#terminal_btn_box').off('click');
 
 
-
+        },
 
         add_control_button: function(){
 
@@ -191,14 +195,15 @@ define(function (require) {
 
     // call some more initalizing stuff around start-up
     bb.on('OSrunning',function(){
-
         //attaching handlers to the HOME and TERMINAL control buttons
         game.initialize_control_buttons();
-
     });
 
-
-
+    //allows controls to be frozen and reactivated when things like password routine are running...
+    bb.on('freeze_controls',game.freeze_control_buttons);
+    bb.on('unfreeze_controls',function(){
+        game.initialize_control_buttons();
+    });
 
     game.start();
 

@@ -12,6 +12,7 @@ define(function (require) {
 
 
 
+    var password_tries = 3;
     // TERMINAL MODEL
     var TerminalModel = cm.ConsoleModel.extend({
 
@@ -19,8 +20,16 @@ define(function (require) {
         defaults:{
 
             my_region:"#activity", //may or may not be useful for terminal to know where in OS layout it is (what region)
-            current_command:"",
-            current_packet:{}
+            current_command:'',
+            current_packet:{},
+            display_buffer:['Testing Buffer...'],
+            admin_pass:'1234',
+            command_line_handle:'',
+            user_handle:'user137$',
+            open:false,
+            installed:true
+
+
 
         },
 
@@ -52,37 +61,104 @@ define(function (require) {
 
         },
 
+        passwordRoutine: function () {
 
-        action :{
+            console.log('here too');
+
+            //change handle on command line from user to 'passwrd:' and give instructions to enter password
+            this.set({'command_line_handle' : 'passwrd:'});
+            this.set({'current_packet': install_packets.password_entry});
+            bb.trigger('freeze_controls');
+
+            var passwd_attempts = 0;
+            var admin_pass = this.get('admin_pass');
+            var user_handle = this.get('user_handle');
 
 
-                "test":function(){console.log('yay!')},
+            var password_check = function () {
+
+                    console.log(this.get('current_command'));
+
+                if (this.get('current_command') === admin_pass) {
+
+                    console.log('hooray');
+
+                        //this.off('change:current_command');
+                        this.set({'command_line_handle' : user_handle});
+
+                        bb.trigger('wallet_password_correct');
+                    } else {
+
+                    console.log('blah');
+                        passwd_attempts += 1;
+                        console.log('attempts:'+passwd_attempts);
+                        this.set({'current_packet' : {packet_data: 'Incorrect password.  Try again.'}});
+                        if (passwd_attempts === 3) {
+                            console.log('loser');
+                            this.off('change:current_command');
+                            this.on('change:current_command', this.onNewCommand,this);
+                            this.set({'command_line_handle' : user_handle});
+                            bb.trigger('unfreeze_controls');
+                        }
+                    }
+                };
+
+
+
+            //turn off event listening for general terminal commands
+            this.off('change:current_command', this.onNewCommand);
+
+            //turn on event listening for implicitly defined password function
+            this.on('change:current_command', _.bind(password_check,this));
+
+        },
+
+
+        wallet_installation :function () {
+
+
+            //this is the actual installation file
+            var install = function () {
+
+                console.log('wallet has been installed...or has it?')
+                bb.trigger('unfreeze_controls');
+
+            };
+
+            this.off('change:current_command'); //remove listener being used by password routine (really removes ANY listeners on change:current_command
+            this.on('change:current_command', this.onNewCommand, this);  //turn back on for general terminal commands
+
+
+            console.log('installing wallet animation');
+            bb.once('print_job_complete', _.bind(install, this));
+            this.set({'current_packet': install_packets.wallet});
+
+            this.install_list.wallet = true;
+
+        },
+
+
+        action : {
+
+
+            "test": function () {
+                console.log('yay!')
+            },
 
             //'sudo apt-get install _____'
-                "bit":function(){
+            "bit": function () {
 
-                    //this is the actual installation file
-                    var install=function(){
+                //- check that action hasn't already been done...
+                if (this.install_list.wallet === false) {
 
-                        console.log('wallet has been installed...or has it?')
+                    bb.on('wallet_password_correct', _.bind(this.wallet_installation, this));
 
-                    };
-
-
-                    this.set({'current_packet':install_packets.wallet});
-
-                    //- check that action hasn't already been done...
-                    if (this.install_list.wallet === false){
-                        console.log('installing wallet');
-
-                        bb.on('wallet_install_display_complete', _.bind(install,this));
-
-                        this.trigger('installing_wallet');
-                    }
-                    else{return}
-                    this.install_list.wallet = true;
+                    _.bind(this.passwordRoutine,this)();
                 }
+                else{console.log('already installed')}
             }
+
+        }
     });
 
 
@@ -90,11 +166,31 @@ define(function (require) {
 
 
         wallet:{
-            packet_data:['testing this print stuff out...',
-                'testing this print stuff out more...',
-                '...and more'],
+            packet_data:['Opening connection with https://www.coinlab.com/cl-host',
+                'Downloading cl-wallet_pkg...',
+                'Creating installation directories...',
+                'Installing software...',
+                'Updating file permissions...',
+                'Installation of cl-wallet is complete...',
+                'Installation of cl-trPLTFRM is complete...',
+                'Installation of cl-dcoinProtocolAPI is complete...',
+                'Installation of cl-localDB is complete...',
+                'Configuring cl-wallet...',
+                'Configuring AD FS configuration of cl-localDB...',
+                'Retrieving local dtc-configfile...',
+                'Installation complete...',
+                'Cleaning up files...',
+                '...',
+                '...',
+                '...',
+                '...'
+            ],
             packet_type:'multi',
-            packet_delay:1000
+            packet_delay:500
+        },
+
+        password_entry:{
+            packet_data:'Installation requires admin privileges.  Enter Password to proceed.'
         }
 
 

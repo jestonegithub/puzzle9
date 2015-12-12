@@ -19,8 +19,8 @@ define(function (require) {
 
         defaults: {
 
-            installed: false,
-            maximized: false
+            installed: '',
+            open: ''
 
         }
     });
