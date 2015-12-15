@@ -141,8 +141,13 @@ define(function (require) {
         action : {
 
 
-            "test": function () {
-                console.log('yay!')
+            "mine": function () {
+                console.log('starting mining process...');
+                this.set({'current_packet':install_packets.mine_local_startup});
+                bb.trigger('starting_local_mining');
+
+
+
             },
 
             //'sudo apt-get install _____'
@@ -190,7 +195,36 @@ define(function (require) {
         },
 
         password_entry:{
-            packet_data:'Installation requires admin privileges.  Enter Password to proceed.'
+            packet_data:['__________________________________________________________',
+                         '|',
+                         '|CRYPTONITE PASSWORD MANAGER',
+                         '|_________________________________________________________',
+                         '[S Y S T E M  M S G  I D : 0 1 9 4 8 1 7 4  2 3 4 7 9 2]',
+                         'This action requires administrator privileges.',
+                         'Enter your password (3 attempts)',
+                         '__________________________________________________________',
+                         '*********************************',
+                         '*****************************',
+                         '**********************',
+                         '****************',
+                         '**********',
+                         '*******',
+                         '****',
+                         '*'
+            ],
+            packet_type:'multi',
+            packet_delay:100
+        },
+
+        mine_local_startup:{
+
+            packet_data:['Starting Cryptominer thread...',
+                         'Obtaining cryptocurrency type...',
+                         'Connecting to local_walletAPI...',
+                         'Now mining coins'
+            ],
+            packet_type:'multi',
+            packet_delay:400
         }
 
 

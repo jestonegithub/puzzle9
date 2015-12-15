@@ -94,9 +94,10 @@
 
     position:relative;
     height:35px;
-    width:600px;
+    width:550px;
     float:left;
     margin-left: 8px;
+
 
 }
 
@@ -129,7 +130,7 @@
 
     position:relative;
     height:35px;
-    width:310px;
+    width:360px;
     float:left;
 
 }
@@ -137,19 +138,27 @@
 
     position:relative;
     height:inherit;
-    width:60px;
+    width:50px;
     float:left;
+    align-content: center;
 
 }
 
 .control_icons {
 
-    width:50px;
-    text-align: center;
-    float:right;
+    /*width:50px;*/
+    /*text-align: center;*/
+    /*float:right;*/
+    margin-left:10px;
     color: #dee0e3;
-    font-size: 30px;
+    font-size: 25px;
     cursor: pointer;
+
+}
+
+.cntrl_suite{
+
+    margin-bottom: 10px;
 
 }
 
@@ -210,15 +219,87 @@
 
 #os_serial{
 
-    bottom:35px;
-    left:20px;
-    color:black;
+    top:110px;
+    margin-left:20px;
     position:absolute;
+    min-height:20px;
+    /*color:white;*/
+    /*position:absolute;*/
     width:500px;
-    font-size:15px;
-    font-family: 'Raleway',sans-serif;
+    /*font-size:15px;*/
+    /*font-family: 'Raleway',sans-serif;*/
 }
 
+
+.os_serial{
+
+   background-color:white;
+   min-height:20px;
+   min-width:10px;
+
+}
+
+
+#os_serial1{
+
+    position:absolute;
+    left:0;
+
+}
+
+
+#os_serial2{
+
+    position:absolute;
+    left:38px;
+
+}
+
+
+#os_serial3{
+
+    position:absolute;
+    left:78px;
+
+}
+
+
+#os_serial4{
+
+    position:absolute;
+    left:105px;
+
+}
+
+
+#os_serial5{
+
+    position:absolute;
+    left:140px;
+
+}
+
+
+#os_serial6{
+
+    position:absolute;
+    left:185px;
+
+}
+
+#os_serial7{
+
+    position:absolute;
+    left:210px;
+
+}
+
+#os_serial8{
+
+    position:absolute;
+    left:278px;
+
+}
 
 /*ACTIVITY STYLES*/
 

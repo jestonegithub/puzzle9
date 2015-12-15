@@ -17,6 +17,7 @@ define(function (require) {
     var cm = require('./models/currencyModel');
     var tiv = require('./views/terminalItemView');
     var tm = require('./models/terminalModel');
+    var time = require('./models/timeModel');
 
 
 
@@ -41,6 +42,8 @@ define(function (require) {
 
             //the menu view is always visible throughout the life of the app - regardless of startscreen, main game, etc. - so we initialize it here
             this.gamemenuview = new gmv.GameMenuView();
+            this.local_mining_interval = 5;
+            this.coin_currency = {};
 
         },
 
@@ -66,8 +69,8 @@ define(function (require) {
             //load in MODELS
             //  Resources and currency/prices (placeholder for price only) - TODO: add tool models
             this.resources = rm.Resources; // to reduce clutter in GameEngine, object of all resources is loaded within resourceModel module and exported to here
-            var btc_currency = new cm.CurrencyModel({name:'bitcoin',symbol:'btc'});
-            var usd_currency = new cm.CurrencyModel({name:'dollars',symbol:'usd'});
+            this.coin_currency = new cm.CurrencyModel({name:'dotcoin',symbol:'dtc'});
+            this.usd_currency = new cm.CurrencyModel({name:'dollars',symbol:'usd'});
 
 
 
@@ -141,6 +144,10 @@ define(function (require) {
             },this));
 
 
+
+
+
+
         },
 
         freeze_control_buttons:function(){
@@ -157,9 +164,6 @@ define(function (require) {
 
 
         },
-
-
-
 
 
         inventory_init: function(){
@@ -205,7 +209,19 @@ define(function (require) {
         game.initialize_control_buttons();
     });
 
+
+
+    game.time = new time.TimeModel();
+    game.time.startTime();
+
+    bb.on('starting_local_mining',function(){
+        game.time.addToList('local_mining', function(){game.coin_currency.add_resource(1);}, game.local_mining_interval)
+    });
+
     game.start();
+
+
+
 
 
 

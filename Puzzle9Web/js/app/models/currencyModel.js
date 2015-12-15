@@ -27,14 +27,18 @@ define(function (require) {
 
         // currencies can be added and removed...
         add_resource: function (num_added) {
-            if (this.num+num_added <= DefaultResourceMax){
-                this.num += num_added;
+
+            if (this.get('quantity')+num_added <= DefaultCurrencyMax){
+                this.set({'quantity':this.get('quantity')+num_added});
             }
+
+            console.log('coins:'+this.get('quantity'));
+
         },
 
         remove_resource: function (num_removed) {
-            if (this.num >= num_removed) {
-                this.num -= num_removed
+            if (this.get('quantity') >= num_removed) {
+                this.set({'quantity':this.get('quantity')-num_removed});
             }
         }
     });
