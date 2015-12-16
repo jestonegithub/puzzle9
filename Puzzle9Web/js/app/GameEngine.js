@@ -18,6 +18,8 @@ define(function (require) {
     var tiv = require('./views/terminalItemView');
     var tm = require('./models/terminalModel');
     var time = require('./models/timeModel');
+    var civ = require('./views/currencyItemView');
+    var bm = require('./models/browserModel');
 
 
 
@@ -69,7 +71,7 @@ define(function (require) {
             //load in MODELS
             //  Resources and currency/prices (placeholder for price only) - TODO: add tool models
             this.resources = rm.Resources; // to reduce clutter in GameEngine, object of all resources is loaded within resourceModel module and exported to here
-            this.coin_currency = new cm.CurrencyModel({name:'dotcoin',symbol:'dtc'});
+            this.coin_currency = new cm.CurrencyModel({name:'zipcoin',symbol:'zpc'});
             this.usd_currency = new cm.CurrencyModel({name:'dollars',symbol:'usd'});
 
 
@@ -94,13 +96,19 @@ define(function (require) {
 
 
 
-            //// the TERMINAL already exists on starting up OS - so we add a new terminal model
+            //// the TERMINAL is a default program on starting up OS - so we add a new terminal model
             this.terminalModel = new tm.TerminalModel({input_form_id:"#user_input"});
             //this.terminalView = new tiv.TerminalItemView({model:this.terminalModel});
 
 
+            //// browser is also a default program on starting up OS - so we add a new browser model
+            //TODO: this.browserModel = new bm.BrowserModel();
+
+
+
             this.listenTo(this.loadOSview,'loadOSEnd', function(){
                 $('#game_wrapper').show();
+                $('.suite_icons').hide();
                 bb.trigger('OSrunning');
             });
 
@@ -195,7 +203,7 @@ define(function (require) {
         else{}
     });
 
-    bb.on('sequenceend',_.bind(game.loadOS,game));
+    bb.on('sequenceend',_.bind(game.loadOS,game)); //will load up the OS once the 'start' animation is completed
 
     // call some more initalizing stuff around start-up
     bb.on('OSrunning',function(){
@@ -215,6 +223,7 @@ define(function (require) {
     game.time.startTime();
 
     bb.on('starting_local_mining',function(){
+        game.oslayoutview.coin_box.show(new civ.CurrencyItemView({model:game.coin_currency}));
         game.time.addToList('local_mining', function(){game.coin_currency.add_resource(1);}, game.local_mining_interval)
     });
 

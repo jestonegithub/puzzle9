@@ -56,9 +56,18 @@ define(function (require) {
         modelEvents: {
 
             'change:current_packet':'printToScreen',
-            'change:command_line_handle':'changeCommandHandle'
+            'change:command_line_handle':'changeCommandHandle',
+            'change:color_scheme':'changeTransparency'
+
+        },
+
+        changeTransparency:function(){
+
+            if (this.model.get('color_scheme') === 'default'){$('#terminal_body').css('opacity','1.0')}
+            if (this.model.get('color_scheme') === 'modern'){$('#terminal_body').css('opacity','0.8')}
 
         }
+
 
     });
 

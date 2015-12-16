@@ -22,12 +22,13 @@ define(function (require) {
             my_region:"#activity", //may or may not be useful for terminal to know where in OS layout it is (what region)
             current_command:'',
             current_packet:{},
-            display_buffer:['Testing Buffer...'],
+            display_buffer:['Cryptonite Command Line Terminal.  Type "help" at any time.'],
             admin_pass:'1234',
             command_line_handle:'',
             user_handle:'user137$',
             open:false,
-            installed:true
+            installed:true,
+            color_scheme:'default'
 
 
 
@@ -67,7 +68,7 @@ define(function (require) {
 
             //change handle on command line from user to 'passwrd:' and give instructions to enter password
             this.set({'command_line_handle' : 'passwrd:'});
-            this.set({'current_packet': install_packets.password_entry});
+            this.set({'current_packet': terminal_packets.password_entry});
             bb.trigger('freeze_controls');
 
             var passwd_attempts = 0;
@@ -131,7 +132,7 @@ define(function (require) {
 
             console.log('installing wallet animation');
             bb.once('print_job_complete', _.bind(install, this));
-            this.set({'current_packet': install_packets.wallet});
+            this.set({'current_packet': terminal_packets.wallet});
 
             this.install_list.wallet = true;
 
@@ -140,15 +141,41 @@ define(function (require) {
 
         action : {
 
+            "help": function(){
+                this.set({'current_packet':terminal_packets.terminal_help})
+            },
+
+            "system info": function(){
+                this.set({'current_packet':terminal_packets.system_info})
+            },
+
 
             "mine": function () {
                 console.log('starting mining process...');
-                this.set({'current_packet':install_packets.mine_local_startup});
+                this.set({'current_packet':terminal_packets.mine_local_startup});
                 bb.trigger('starting_local_mining');
+
+            },
+
+            "set colorscheme -default":function(){
+
+                this.set({'color_scheme':'default'});
 
 
 
             },
+
+
+            "set colorscheme -modern":function(){
+
+                this.set({'color_scheme':'modern'})
+
+            },
+
+
+
+
+
 
             //'sudo apt-get install _____'
             "bit": function () {
@@ -167,7 +194,7 @@ define(function (require) {
     });
 
 
-    var install_packets={
+    var terminal_packets={
 
 
         wallet:{
@@ -225,6 +252,32 @@ define(function (require) {
             ],
             packet_type:'multi',
             packet_delay:400
+        },
+
+        terminal_help:{
+
+            packet_data:['The following commands are available for terminal users (enter exactly as provided):',
+                         '"help" - clearly.',
+                         '"system info" - provide basic system and user configurations',
+                         '"mine" - starts local mining processes for default cryptocurrency',
+                         '"set colorscheme -default" - sets terminal colors to default scheme',
+                         '"set colorscheme -modern" - sets terminal colors to translucent background'
+            ],
+            packet_type:'multi',
+            packet_delay:0
+
+        },
+
+        system_info:{
+
+            packet_data:['Operating System: Cryptonite OS',
+                         'Processor: 2.5 GHz QuadCore',
+                         'Memory: 16GB RAM',
+                         'Cryptocurrency: .Coin'
+            ],
+            packet_type:'multi',
+            packet_delay:0
+
         }
 
 

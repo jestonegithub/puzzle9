@@ -50,6 +50,7 @@
     width:144px;
     border:1px solid white;
 
+
 }
 
 .resource_name{
@@ -94,9 +95,10 @@
 
     position:relative;
     height:35px;
-    width:550px;
+    width:605px;
     float:left;
     margin-left: 8px;
+    /*border:1px solid white;*/
 
 
 }
@@ -105,22 +107,50 @@
 
     float:left;
     color:white;
-    height:30px;
+    height:25px;
     width:144px;
     margin-left:8px;
     margin-top:7px;
     font-size:16px;
+    margin-bottom:4px;
 
 }
 
 .active_currency{
 
-    background-color: rgb(250, 69, 76);
-    height:30px;
+    background-color: #4488c0;
+    height:23px;
     width:144px;
     border:1px solid white;
 
+
 }
+
+
+.currency_name{
+
+    text-align:center;
+    position:relative;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right:1px solid white;
+    float:left;
+    margin-bottom: 4px;
+
+
+}
+
+.currency_value {
+
+    text-align:right;
+    position:relative;
+    padding-right: 5px;
+    float:right;
+    margin-bottom: 4px;
+
+
+}
+
 
 
 
@@ -130,7 +160,7 @@
 
     position:relative;
     height:35px;
-    width:360px;
+    width:305px;
     float:left;
 
 }
@@ -141,6 +171,7 @@
     width:50px;
     float:left;
     align-content: center;
+    /*border:1px solid white;*/
 
 }
 

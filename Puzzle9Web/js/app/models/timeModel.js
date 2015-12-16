@@ -36,8 +36,6 @@ define(function (require) {
 
         launch_callBacks:function(){
 
-            console.log('launching callbacks');
-
             var callBackList = this.get('callBackList');
             var global_t = this.get('global_time');
 
@@ -79,9 +77,6 @@ define(function (require) {
             //console.log(increment);
 
            setInterval(_.bind(function(){
-
-              // console.log('global time is:'+this.get('global_time'));
-              // console.log('day is:'+this.get('game_date'));
 
                delta = this.get('delta_time');
                cur_time = this.get('global_time');

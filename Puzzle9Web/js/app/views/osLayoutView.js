@@ -21,7 +21,7 @@ define(function (require) {
             region1:'#region1', //doubles for resources and terminal during hacking
             tools:'#tools',
             panels: "#panels",
-            money_panel: '#money_panel',
+            coin_box: '#coin_box',
             control_panel: '#control_panel',
             rainmeter: '#rainmeter',
             activity: '#activity',
