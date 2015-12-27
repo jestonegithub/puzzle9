@@ -20,6 +20,10 @@ define(function (require) {
     var time = require('./models/timeModel');
     var civ = require('./views/currencyItemView');
     var bm = require('./models/browserModel');
+    var blv = require('./views/browserLayoutView');
+    var bmv = require('./views/browserMenuItemView');
+    var utils = require('./Utilities');
+
 
 
 
@@ -71,8 +75,8 @@ define(function (require) {
             //load in MODELS
             //  Resources and currency/prices (placeholder for price only) - TODO: add tool models
             this.resources = rm.Resources; // to reduce clutter in GameEngine, object of all resources is loaded within resourceModel module and exported to here
-            this.coin_currency = new cm.CurrencyModel({name:'zipcoin',symbol:'zpc'});
-            this.usd_currency = new cm.CurrencyModel({name:'dollars',symbol:'usd'});
+            this.coin_currency = cm.Coins;
+            this.usd_currency = cm.Dollars;
 
 
 
@@ -102,7 +106,7 @@ define(function (require) {
 
 
             //// browser is also a default program on starting up OS - so we add a new browser model
-            //TODO: this.browserModel = new bm.BrowserModel();
+            this.browserModel = new bm.BrowserModel();
 
 
 
@@ -133,10 +137,28 @@ define(function (require) {
 
         initialize_control_buttons:function(){
 
+            var set_all_as_closed=function(){
+
+                this.terminalModel.set({'open': false});
+                this.browserModel.set({'open': false});
+                //this.current_browser_layout.destroy();
+
+            };
+
+
+            var destroy_browserLayout=function(){
+
+                this.current_browser_layout.destroy();
+
+            };
+
             $('#home_btn_box').click(_.bind(function(){
                 console.log('closing any open view in #activity');
                 this.oslayoutview.activity.empty();
-                this.terminalModel.set({'open': false});
+                _.bind(set_all_as_closed,this)();
+                if (this.current_browser_layout != undefined){_.bind(destroy_browserLayout,this)();}
+                //this.terminalModel.set({'open': false});
+                //this.browserModel.set({'open': false});
 
 
             },this));
@@ -146,13 +168,31 @@ define(function (require) {
 
                 if(this.terminalModel.get('open') === false) {
                     this.oslayoutview.activity.show(new tiv.TerminalItemView({model: this.terminalModel}));
+                    _.bind(set_all_as_closed,this)();
                     this.terminalModel.set({'open': true});
+                    if (this.current_browser_layout != undefined){_.bind(destroy_browserLayout,this)();}
                     console.log('opening terminal window in #activity');
                 }
             },this));
 
 
+            $('#browser_btn_box').click(_.bind(function(){
 
+                if(this.browserModel.get('open') === false) {
+                    this.current_browser_layout = new blv.BrowserLayoutView({model:this.browserModel});
+                    this.oslayoutview.activity.show(this.current_browser_layout);
+                    _.bind(set_all_as_closed,this)();
+                    this.browserModel.set({'open': true});
+
+                    //load current view
+                    this.current_browser_layout.load_site();
+
+                    //load handler for when current site changes
+
+                    //this.current_browser_layout.siteregion.show(new subv.SubscriptionSiteItemView({model:this.browserModel}));
+                    console.log('opening browser window in #activity');
+                }
+            },this));
 
 
 
@@ -219,19 +259,25 @@ define(function (require) {
 
 
 
-    game.time = new time.TimeModel();
+    game.time = time.Timer;
     game.time.startTime();
 
     bb.on('starting_local_mining',function(){
         game.oslayoutview.coin_box.show(new civ.CurrencyItemView({model:game.coin_currency}));
-        game.time.addToList('local_mining', function(){game.coin_currency.add_resource(1);}, game.local_mining_interval)
+        game.time.addToList('local_mining', function(){game.coin_currency.add_currency(1);}, game.local_mining_interval);
+
+
+        //DEV ONLY
+
+        game.oslayoutview.usd_box.show(new civ.CurrencyItemView({model:game.usd_currency}));
+        game.usd_currency.add_currency(100);
+
     });
 
     game.start();
 
 
-
-
+    tester.tweet = utils.tweet;
 
 
 

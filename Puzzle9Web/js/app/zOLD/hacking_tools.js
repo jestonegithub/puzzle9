@@ -43,7 +43,7 @@ define(['./resource_items','./ewallet'],function(resourceitems,ewallet) {
                         } else {
 
                             if (resourceitems[name]['num'] >= this.costs[name]) {
-                                resourceitems[name]['remove_resource'](this.costs[name])
+                                resourceitems[name]['remove_currency'](this.costs[name])
                                 this.purchased = true;
                             }
                         }
@@ -168,7 +168,7 @@ define(['./resource_items','./ewallet'],function(resourceitems,ewallet) {
         register_resource: function(){
             inventory.register_item(this.resource_type)
         },
-        add_resource: function (num_added) {
+        add_currency: function (num_added) {
 
             this.num += num_added;
             inventory.update_item(this.resource_type,this.num);
@@ -176,7 +176,7 @@ define(['./resource_items','./ewallet'],function(resourceitems,ewallet) {
 
         },
 
-        remove_resource: function (num_removed){
+        remove_currency: function (num_removed){
 
             if(this.num >= num_removed) {this.num -= num_removed};
 

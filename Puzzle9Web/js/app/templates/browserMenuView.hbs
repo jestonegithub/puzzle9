@@ -1,0 +1,15 @@
+<div id="site_address"><input type="text" name="command" id="site_address_input" placeholder={{current_address}}
+                              disabled></div>
+<div id=site_menu>
+    <div class="bookmark_container">
+        <div class="dropdown">
+            <button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Bookmarks<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                {{#each bookmark_list}}
+                <li><a>{{this}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

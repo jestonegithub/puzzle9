@@ -46,7 +46,7 @@ define(['./inventory','./ewallet','./resource_items'],function(inventory,ewallet
                         } else {
 
                             if (resourceitems[name]['num'] >= this.costs[name]) {
-                                resourceitems[name]['remove_resource'](this.costs[name])
+                                resourceitems[name]['remove_currency'](this.costs[name])
                                 this.purchased = true;
                             }
                         }

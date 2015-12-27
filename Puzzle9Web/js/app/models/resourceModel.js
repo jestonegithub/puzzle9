@@ -26,13 +26,13 @@ define(function (require) {
 
 
         // resources can be added and removed...
-        add_resource: function (num_added) {
+        add_currency: function (num_added) {
             if (this.num+num_added <= DefaultResourceMax){
                 this.num += num_added;
             }
         },
 
-        remove_resource: function (num_removed) {
+        remove_currency: function (num_removed) {
             if (this.num >= num_removed) {
                 this.num -= num_removed
             }

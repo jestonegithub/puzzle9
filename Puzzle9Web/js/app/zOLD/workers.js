@@ -157,7 +157,7 @@ define(['./inventory','./ewallet','./resource_items','./timer'],function(invento
                                 if (name === 'btc' || name === 'dollars') {
                                         ewallet['change_' + name](-1 * this.sinks[name])
                                 } else {
-                                        resourceitems[name]['remove_resource'](this.sinks[name])
+                                        resourceitems[name]['remove_currency'](this.sinks[name])
                                 }
                             }
                         }
@@ -169,8 +169,8 @@ define(['./inventory','./ewallet','./resource_items','./timer'],function(invento
                                 if (name === 'btc' || name === 'dollars') {
                                         ewallet['change_' + name](this.sources[name])
                                 } else {
-                                        console.log(name,resourceitems[name]['add_resource']);
-                                        resourceitems[name]['add_resource'](this.sources[name])
+                                        console.log(name,resourceitems[name]['add_currency']);
+                                        resourceitems[name]['add_currency'](this.sources[name])
                                 }
                             }
                         }

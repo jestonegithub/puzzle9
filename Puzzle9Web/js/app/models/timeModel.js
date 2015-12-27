@@ -42,6 +42,7 @@ define(function (require) {
             for (var name in callBackList) {
                 if (callBackList.hasOwnProperty(name)) {
                     if ((global_t-callBackList[name]['start'])%callBackList[name]['interval'] === 0) {
+                        console.log('calling:'+name);
                         if (callBackList[name]['arg'] != undefined) {
                             callBackList[name]['callback'](callBackList[name]['arg']);
                         }
@@ -112,12 +113,10 @@ define(function (require) {
     });
 
 
+    var Timer = new TimeModel();
 
 
-
-
-
-    return {TimeModel:TimeModel}
+    return {Timer:Timer}
 
 
 });

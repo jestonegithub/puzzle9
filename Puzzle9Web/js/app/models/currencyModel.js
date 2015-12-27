@@ -26,7 +26,7 @@ define(function (require) {
 
 
         // currencies can be added and removed...
-        add_resource: function (num_added) {
+        add_currency: function (num_added) {
 
             if (this.get('quantity')+num_added <= DefaultCurrencyMax){
                 this.set({'quantity':this.get('quantity')+num_added});
@@ -36,7 +36,7 @@ define(function (require) {
 
         },
 
-        remove_resource: function (num_removed) {
+        remove_currency: function (num_removed) {
             if (this.get('quantity') >= num_removed) {
                 this.set({'quantity':this.get('quantity')-num_removed});
             }
@@ -44,8 +44,12 @@ define(function (require) {
     });
 
 
+    var Coins = new CurrencyModel({name:'zipcoin',symbol:'zpc'});
+    var Dollars = new CurrencyModel({name:'dollars',symbol:'usd'});
 
-    return {CurrencyModel:CurrencyModel}
+
+    return {Coins:Coins,
+            Dollars:Dollars}
 
 
 });

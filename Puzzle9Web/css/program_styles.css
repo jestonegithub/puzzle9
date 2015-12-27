@@ -98,16 +98,18 @@ input[type="text"]:focus {
 }
 
 
-/*MINER STYLES*/
 
 
-#miner_div{
 
+/*BROWSER STYLES*/
+
+#browser_div{
+
+    font-family: "Maven Pro", sans-serif;
     position:absolute;
     top:5px;
     left:5px;
-    /*background-color: #c3d4df;*/
-    background-color: #fb7a33;
+    background-color: #d8d8d8;
     height:400px;
     width:600px;
     border: 2px solid white;
@@ -116,45 +118,206 @@ input[type="text"]:focus {
 
 }
 
-#miner_header{
 
-    height:80px;
+.browser_style{
+
+    /*color:white;*/
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+
+
+}
+
+#browser_title {
+
     margin-left: 20px;
+    color: #2e3032;
+    margin-top:10px;
+
+}
+
+
+#browser_head {
+
+    height:50px;
+
+
+}
+
+#site_address {
+    margin-top:15px;
+    margin-left:15px;
     position:relative;
     float:left;
+    width:400px;
 
 }
 
-.miner_style{
+.bookmark_container{
 
-    color:white;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 30px;
-
+    width:200px;
 
 }
 
 
+#site_address_input{
 
-#mine_button {
+    height:20px;
+    width:400px;
+    font-size:12px;
 
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    display:block;
+}
+
+#site_menu{
+
+    position:relative;
+    float:left;
+    width:100px;
+    height:20px;
+    margin-top:12px;
+
+}
+
+.site_menu {
+
     color:grey;
     font-size:15px;
-    margin-top:25px;
-    width:50px;
-    cursor:pointer;
+    display:inline;
+    margin-left:20px;
+    cursor: pointer;
+
+
+}
+
+
+.site_menu:hover {
+
+    color:white;
+
+}
+
+#site_content_region{
+
+    position:relative;
+    width:598px;
+    height:306px;
+    background-color:white;
+    border: 1px solid white;
+    overflow-y: auto;
+
+
+}
+
+/* BROWSER: SUBCRIPTION PAGE STYLES */
+
+
+
+#sub_site_title{
+
+    font-size:30px;
+    margin-top:10px;
+    text-align: center;
+
+}
+
+.plan_div{
+
+    width:250px;
+    position:relative;
+    float:left;
+    margin-left:30px;
 
 
 
 }
 
-#mine_button:hover{
 
+
+.sub_tiers{
+
+    position:relative;
+    background-color: #2e3032;
     color:white;
+    width:250px;
+    height:80px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow:auto;
 
+}
+
+.plan_titles {
+
+    font-size:20px;
+    margin:10px;
+
+}
+
+.plan_prices {
+
+    margin:10px;
+    color: #868d94;
+
+}
+
+#buy_subscription_div{
+
+   height:50px;
+   margin-top:20px;
+
+}
+
+#subscription_button{
+
+    margin-left:auto;
+    margin-right:auto;
+    height:30px;
+    width:200px;
+    background: #3458df;
+    color:white;
+    text-align:center;
+    padding-top: 5px;
+    border-radius: 5px;
+    cursor:pointer;
+
+}
+
+#subscription_button:hover{
+
+    color:grey;
+
+}
+
+.sub_programs{
+
+    padding-top:10px;
+    /*border:1px solid #aaaaaa;*/
+    background-color: rgba(213, 213, 213, 0.56);
+    border-bottom: 1px solid grey;
+    padding-bottom:5px;
+
+}
+
+.sub_programs_title{
+
+    font-size:20px;
+
+}
+
+.sub_programs_title_words{
+
+    padding-left:5px;
+    margin-right:10px;
+    float:left;
+    font-size:20px;
+
+}
+
+.sub_programs_description{
+
+    font-size:12px;
+    padding-left:5px;
+    padding-right:5px;
 
 }

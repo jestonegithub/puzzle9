@@ -220,7 +220,7 @@ define(['./ewallet','bootstrap','./mine','./resource_items'],function(ewallet,bo
                                         } else {
 
                                             if (resourceitems[name3]['num'] >= this_item.costs[name]) {
-                                                resourceitems[name3]['remove_resource'](this_item.costs[name3])
+                                                resourceitems[name3]['remove_currency'](this_item.costs[name3])
                                             }
                                         }
                                     }
@@ -229,7 +229,7 @@ define(['./ewallet','bootstrap','./mine','./resource_items'],function(ewallet,bo
                               //now purchase the item - this depends on whether it's a resource or an upgrade
                               if (this_item.cat === 'resource') {
 
-                                resourceitems[name]['add_resource'](this_item['batch_num']);}
+                                resourceitems[name]['add_currency'](this_item['batch_num']);}
 
                               else{
 

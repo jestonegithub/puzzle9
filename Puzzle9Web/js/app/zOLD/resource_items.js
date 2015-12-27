@@ -30,7 +30,7 @@ define(['./inventory','./ewallet'],function(inventory,ewallet) {
         register_resource: function(){
           inventory.register_item(this.resource_type)
         },
-        add_resource: function (num_added) {
+        add_currency: function (num_added) {
 
             this.num += num_added;
             inventory.update_item(this.resource_type,this.num);
@@ -38,7 +38,7 @@ define(['./inventory','./ewallet'],function(inventory,ewallet) {
 
         },
 
-        remove_resource: function (num_removed){
+        remove_currency: function (num_removed){
 
             if(this.num >= num_removed) {this.num -= num_removed};
 
