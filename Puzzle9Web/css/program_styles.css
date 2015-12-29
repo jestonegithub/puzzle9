@@ -9,7 +9,8 @@
     left:5px;
     height:400px;
     width:600px;
-    font-family: sans-serif;
+    font-family: "Source Code Pro", sans-serif;
+    font-size:13px;
 
 }
 
@@ -27,7 +28,7 @@
 
 #terminal_body{
 
-    background-color: #424345;
+    background-color: #272727;
     color:white;
     border:2px solid rgb(209, 209, 209);
     height:375px;
@@ -90,7 +91,7 @@ input[type="text"] {
 }
 
 #user_input{
-    background-color: #424345;
+    background-color: #272727;
 }
 
 input[type="text"]:focus {
@@ -208,15 +209,94 @@ input[type="text"]:focus {
 
 }
 
-/* BROWSER: SUBCRIPTION PAGE STYLES */
+/* BROWSER: SUBSCRIPTION PAGE STYLES */
+
+.subscription_site_div{
+
+    font-family: 'Quattrocento Sans', sans-serif;
+
+}
 
 
 
 #sub_site_title{
 
-    font-size:30px;
+    color:white;
+    background-color: #2e3032;
+    font-size:15px;
+    height:22px;
+    text-align: left;
+    padding-left:10px;
+
+}
+
+#sub_site_header{
+
+    height:150px;
+    margin-top:20px;
+
+}
+
+.sub_site_header_col{
+
+    width:295px;
+    float:left;
+
+
+}
+
+
+
+#sub_site_product_title{
+
+    font-size:20px;
+    width:250px;
+    text-align: left;
     margin-top:10px;
+    margin-left:30px;
+
+}
+
+#sub_site_product_description{
+
+    margin-left:30px;
+    font-size: 15px;
+    color:grey;
+
+}
+
+#sub_site_trial_list{
+
+    font-size:10px;
+    color:grey;
+    margin-left:5px;
+
+}
+
+#sub_site_header_graphic{
+
+    width:200px;
+    margin-left:auto;
+    margin-right:auto;
     text-align: center;
+
+}
+
+.fa-laptop{
+
+    font-size:170px;
+    color: #ff5c0a;
+
+
+}
+
+
+#sub_site_tag{
+
+    text-align: center;
+    color:grey;
+    font-size:20px;
+    margin-bottom: 15px;
 
 }
 
@@ -232,17 +312,17 @@ input[type="text"]:focus {
 }
 
 
-
-.sub_tiers{
+.sub_programs{
 
     position:relative;
     background-color: #2e3032;
     color:white;
     width:250px;
-    height:80px;
-    text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    height:150px;
+    padding-top: 10px;
+    padding-left:5px;
+    border-radius: 10px;
+    margin-bottom:10px;
     overflow:auto;
 
 }
@@ -264,7 +344,9 @@ input[type="text"]:focus {
 #buy_subscription_div{
 
    height:50px;
+    width:200px;
    margin-top:20px;
+    margin-left:30px;
 
 }
 
@@ -289,15 +371,15 @@ input[type="text"]:focus {
 
 }
 
-.sub_programs{
+/*.sub_programs{*/
 
-    padding-top:10px;
-    /*border:1px solid #aaaaaa;*/
-    background-color: rgba(213, 213, 213, 0.56);
-    border-bottom: 1px solid grey;
-    padding-bottom:5px;
+    /*padding-top:10px;*/
+    /*!*border:1px solid #aaaaaa;*!*/
+    /*background-color: rgba(213, 213, 213, 0.56);*/
+    /*border-bottom: 1px solid grey;*/
+    /*padding-bottom:5px;*/
 
-}
+/*}*/
 
 .sub_programs_title{
 

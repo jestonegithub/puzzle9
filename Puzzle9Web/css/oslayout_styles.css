@@ -448,3 +448,54 @@
     /*Opacity=0, FinishOpacity=100, Style=1, StartX=0, StartY=0, FinishX=0, FinishY=500*/
     /*);*/
 }
+
+
+/*MISC STYLES*/
+
+#welcome_post{
+
+    background-color:white;
+    height:415px;
+    width:608px;
+    border:6px solid mediumpurple;
+    padding-top:50px;
+
+}
+
+#welcome_title{
+
+    text-align:center;
+    color:mediumpurple;
+    font-weight:bold;
+
+}
+
+#welcome_content{
+
+    margin-top:30px;
+    padding-left:20px;
+    padding-right:20px;
+    color:mediumpurple;
+
+}
+
+#start_trial_btn{
+
+    margin-top:50px;
+    width:110px;
+    text-align: center;
+    background-color:mediumpurple;
+    color:white;
+    margin-right:auto;
+    margin-left:auto;
+    cursor:pointer;
+
+
+}
+
+.fine_print{
+
+    font-size:8px;
+    color:grey;
+
+}

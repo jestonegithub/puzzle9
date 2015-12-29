@@ -256,7 +256,7 @@ define(function (require) {
 
         terminal_help:{
 
-            packet_data:['The following commands are available for terminal users (enter exactly as provided):',
+            packet_data:['The following commands are available (enter exactly as provided):',
                          '"help" - clearly.',
                          '"system info" - provide basic system and user configurations',
                          '"mine" - starts local mining processes for default cryptocurrency',

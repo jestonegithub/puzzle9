@@ -23,6 +23,7 @@ define(function (require) {
     var blv = require('./views/browserLayoutView');
     var bmv = require('./views/browserMenuItemView');
     var utils = require('./Utilities');
+    var wv = require('./views/welcomeView');
 
 
 
@@ -202,6 +203,7 @@ define(function (require) {
 
           $('#home_btn_box').off('click');
           $('#terminal_btn_box').off('click');
+          $('#browser_btn_box').off('click');
 
 
         },
@@ -247,8 +249,13 @@ define(function (require) {
 
     // call some more initalizing stuff around start-up
     bb.on('OSrunning',function(){
+        game.oslayoutview.activity.show(new wv.WelcomeView());
+    });
+
+    bb.on('FreeTrialStarted',function(){
         //attaching handlers to the HOME and TERMINAL control buttons
         game.initialize_control_buttons();
+
     });
 
     //allows controls to be frozen and reactivated when things like password routine are running...
@@ -277,13 +284,9 @@ define(function (require) {
     game.start();
 
 
+
+    //For DEV: lets you tweet directly
     tester.tweet = utils.tweet;
-
-
-
-
-
-
 
     return GameEngine;
 });
