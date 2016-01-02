@@ -150,7 +150,7 @@ define(function (require) {
             },
 
 
-            "mine": function () {
+            "mine trucoin": function () {
                 console.log('starting mining process...');
                 this.set({'current_packet':terminal_packets.mine_local_startup});
                 bb.trigger('starting_local_mining');
@@ -257,11 +257,10 @@ define(function (require) {
         terminal_help:{
 
             packet_data:['The following commands are available (enter exactly as provided):',
-                         '"help" - clearly.',
-                         '"system info" - provide basic system and user configurations',
-                         '"mine" - starts local mining processes for default cryptocurrency',
-                         '"set colorscheme -default" - sets terminal colors to default scheme',
-                         '"set colorscheme -modern" - sets terminal colors to translucent background'
+                         '"system info": provide basic system and user configurations',
+                         '"mine [currency]": (e.g., "mine bitcoin") starts cryptocurrency mining',
+                         '"set colorscheme -default": sets terminal colors to default scheme',
+                         '"set colorscheme -modern": sets terminal colors to translucent background'
             ],
             packet_type:'multi',
             packet_delay:0
@@ -273,7 +272,7 @@ define(function (require) {
             packet_data:['Operating System: Cryptonite OS',
                          'Processor: 2.5 GHz QuadCore',
                          'Memory: 16GB RAM',
-                         'Cryptocurrency: .Coin'
+                         'Cryptocurrency: trucoin'
             ],
             packet_type:'multi',
             packet_delay:0

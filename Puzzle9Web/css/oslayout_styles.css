@@ -152,6 +152,45 @@
 }
 
 
+.price_box {
+
+    background-color: #ffffff;
+    height:23px;
+    width:144px;
+    border:1px solid #59b5ff;
+
+}
+
+
+.ticker{
+
+    position:relative;
+    color: black;
+    font-size:15px;
+    float:right;
+    padding-left:2px;
+    padding-right:2px;
+
+}
+
+
+#ticker_name{
+
+    float:left;
+
+}
+
+#ticker_change{
+
+    float:left;
+
+}
+
+
+#ticker_price {
+    float:left;
+}
+
 
 
 /*CONTROL PANEL STYLES*/
@@ -426,15 +465,15 @@
 .notification {
 
     margin-bottom: 10px;
-    min-height:0px;
+    min-height:0;
     border-bottom:1px solid white;
 
 }
 
 #notifyGradient {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
     /*background-color: white;*/
@@ -495,7 +534,7 @@
 
 .fine_print{
 
-    font-size:8px;
+    font-size:10px;
     color:grey;
 
 }

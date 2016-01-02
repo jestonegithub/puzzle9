@@ -44,7 +44,7 @@ define(function (require) {
     });
 
 
-    var Coins = new CurrencyModel({name:'zipcoin',symbol:'zpc'});
+    var Coins = new CurrencyModel({name:'trucoin',symbol:'trc'});
     var Dollars = new CurrencyModel({name:'dollars',symbol:'usd'});
 
 

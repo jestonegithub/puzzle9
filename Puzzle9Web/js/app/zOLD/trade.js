@@ -54,8 +54,7 @@ define(['./inventory','nv','./priceData','./moneyPanel','./timer'],function(inve
 
 
         var usd_values = '<div class=conversion_rate><div id="at_div">at</div><div id=usd_value>0</div><p>USD</p></div>';
-
-        var trade_submit = '<div id=trade_submit_btn class="btn_my transact_btc">Order</div>'
+        var trade_submit = '<div id=trade_submit_btn class="btn_my transact_btc">Order</div>';
 
 
 

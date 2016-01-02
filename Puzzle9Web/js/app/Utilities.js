@@ -3,11 +3,6 @@
  */
 
 
-
-
-
-
-
 define(function (require) {
     var bb = require('backbone');
     var mn = require('marionette');
@@ -30,6 +25,17 @@ define(function (require) {
                 currency.remove_currency(transaction_amount);
                 return true;
             }else{return false}
+
+        },
+
+        deposit_funds: function(currency_type,transaction_amount){
+
+            if (currency_type === 'coins'){var currency = cur.Coins;}
+            if (currency_type === 'dollars'){var currency = cur.Dollars;}
+
+            if (currency_type === undefined){console.log('improper currency type')}
+
+            currency.add_currency(transaction_amount);
 
         }
 
@@ -78,6 +84,7 @@ define(function (require) {
 
 
     return {withdrawal_funds:Broker.withdrawal_funds,
+            deposit_funds:Broker.deposit_funds,
             tweet:TwitterAPI.tweet}
 
 });

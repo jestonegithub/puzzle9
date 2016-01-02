@@ -24,6 +24,9 @@ define(function (require) {
     var bmv = require('./views/browserMenuItemView');
     var utils = require('./Utilities');
     var wv = require('./views/welcomeView');
+    var trm = require('./models/tradingModel');
+    var triv = require('./views/tradingItemView');
+    var ptiv = require('./views/pricetickerItemView');
 
 
 
@@ -110,10 +113,14 @@ define(function (require) {
             this.browserModel = new bm.BrowserModel();
 
 
+            //// trading model
+            this.tradingModel = new trm.TradingModel();
+
 
             this.listenTo(this.loadOSview,'loadOSEnd', function(){
                 $('#game_wrapper').show();
                 $('.suite_icons').hide();
+                $('#trade_btn_box').find('.suite_icons').show();
                 bb.trigger('OSrunning');
             });
 
@@ -142,6 +149,7 @@ define(function (require) {
 
                 this.terminalModel.set({'open': false});
                 this.browserModel.set({'open': false});
+                this.tradingModel.set({'open':false});
                 //this.current_browser_layout.destroy();
 
             };
@@ -194,6 +202,18 @@ define(function (require) {
                     console.log('opening browser window in #activity');
                 }
             },this));
+
+            $('#trade_btn_box').click(_.bind(function(){
+                console.log('clicking trading button');
+                if(this.tradingModel.get('open') === false) {
+                    this.oslayoutview.activity.show(new triv.TradingItemView({model: this.tradingModel}));
+                    _.bind(set_all_as_closed,this)();
+                    this.tradingModel.set({'open': true});
+                    if (this.current_browser_layout != undefined){_.bind(destroy_browserLayout,this)();}
+                    console.log('opening trading floor window in #activity');
+                }
+            },this));
+
 
 
 
@@ -278,12 +298,13 @@ define(function (require) {
 
         game.oslayoutview.usd_box.show(new civ.CurrencyItemView({model:game.usd_currency}));
         game.usd_currency.add_currency(100);
+        game.oslayoutview.price_box.show(new ptiv.PriceTickerItemView({model:game.tradingModel}));
 
     });
 
     game.start();
 
-
+    
 
     //For DEV: lets you tweet directly
     tester.tweet = utils.tweet;

@@ -51,8 +51,7 @@ define(['d3','./timer'],function(d3,timer) {
     var rally_duration = 10;
 
 
-
-    //B-S parameters
+    //Black-Scholes parameters
 
     var initial_price=100;
     var time=1;

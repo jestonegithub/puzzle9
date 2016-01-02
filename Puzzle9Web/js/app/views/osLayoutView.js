@@ -23,6 +23,7 @@ define(function (require) {
             panels: "#panels",
             coin_box: '#coin_box',
             usd_box: '#usd_box',
+            price_box: '#price_box',
             control_panel: '#control_panel',
             rainmeter: '#rainmeter',
             activity: '#activity',

@@ -3,14 +3,14 @@
 svg {
     display: block;
 }
-html, body,#chart2, svg {
+html, body,#price_chart, svg {
     margin: 0px;
     padding: 0px;
     height: 100%;
     width: 100%;
 }
 
-#chart2 {
+#price_chart {
 
     position:static;
     height:230px;
