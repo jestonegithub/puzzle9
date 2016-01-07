@@ -578,3 +578,158 @@ input[type="text"]:focus {
 
 }
 
+
+/* Entrepreneur Stuff */
+
+#ent_div{
+
+    position:absolute;
+    top:5px;
+    left:5px;
+    background-color: #3458df;
+    height:400px;
+    width:600px;
+    border: 2px solid white;
+
+
+
+}
+
+#ent_header{
+
+    height:75px;
+    border: 1px solid black;
+
+
+}
+
+.ent_style{
+
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+
+
+}
+
+#ent_title {
+
+    font-size: 30px;
+    margin-left: 20px;
+    position:relative;
+    float:left;
+    display:inline;
+
+}
+
+
+
+#mycomps{
+
+
+    /*background-color: white;*/
+    /*width:500px;*/
+    /*height:30px;*/
+
+}
+
+#compsales{
+
+//background-color: red;
+
+}
+
+
+#ads{
+
+    /*width:350px;*/
+    /*float:left;*/
+    text-align:center;
+
+
+}
+
+.ads{
+
+    display:inline;
+    padding-left: 10px;
+    padding-right: 10px;
+
+
+}
+
+#workers{
+
+
+    width:200px;
+    float:left;
+}
+
+.workers{
+
+    display:inline;
+    margin-right:10px;
+
+}
+
+#mycomps_div{
+
+    width:350px;
+    margin-top:20px;
+    padding-left:115px;
+    padding-right:20px;
+
+}
+
+#myoccupations_div{
+
+    width:200px;
+
+    margin-top:20px;
+
+}
+
+#holding_content{
+
+    height:200px;
+    overflow-y: auto;
+
+}
+
+.holding_div{
+
+    display:block;
+    height:100px;
+
+
+}
+
+.holding_container{
+
+    font-size:10px;
+
+    border: 1px solid white;
+    padding-left: 5px;
+    padding-right:5px;
+
+}
+
+.buy_holding{
+
+
+    text-align:center;
+
+
+}
+
+.holding_title{
+
+    display:inline;
+
+}
+
+.holding_blurb {
+
+    display:inline;
+    margin-left:10px;
+}

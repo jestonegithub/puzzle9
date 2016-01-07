@@ -27,6 +27,8 @@ define(function (require) {
     var trm = require('./models/tradingModel');
     var triv = require('./views/tradingItemView');
     var ptiv = require('./views/pricetickerItemView');
+    var entv = require('./views/entLayoutView');
+    var entm = require('./models/entModel');
 
 
 
@@ -117,10 +119,15 @@ define(function (require) {
             this.tradingModel = new trm.TradingModel();
 
 
+            this.entModel = new entm.EntModel();
+
+
+
             this.listenTo(this.loadOSview,'loadOSEnd', function(){
                 $('#game_wrapper').show();
                 $('.suite_icons').hide();
                 $('#trade_btn_box').find('.suite_icons').show();
+                $('#ent_btn_box').find('.suite_icons').show();
                 bb.trigger('OSrunning');
             });
 
@@ -150,6 +157,7 @@ define(function (require) {
                 this.terminalModel.set({'open': false});
                 this.browserModel.set({'open': false});
                 this.tradingModel.set({'open':false});
+                this.entModel.set({'open':false});
                 //this.current_browser_layout.destroy();
 
             };
@@ -204,7 +212,6 @@ define(function (require) {
             },this));
 
             $('#trade_btn_box').click(_.bind(function(){
-                console.log('clicking trading button');
                 if(this.tradingModel.get('open') === false) {
                     this.oslayoutview.activity.show(new triv.TradingItemView({model: this.tradingModel}));
                     _.bind(set_all_as_closed,this)();
@@ -214,7 +221,15 @@ define(function (require) {
                 }
             },this));
 
-
+            $('#ent_btn_box').click(_.bind(function(){
+                if(this.entModel.get('open') === false) {
+                    this.oslayoutview.activity.show(new entv.EntLayoutView({model: this.entModel}));
+                    _.bind(set_all_as_closed,this)();
+                    this.entModel.set({'open': true});
+                    if (this.current_browser_layout != undefined){_.bind(destroy_browserLayout,this)();}
+                    console.log('opening entrepreneur window in #activity');
+                }
+            },this));
 
 
         },
@@ -224,6 +239,9 @@ define(function (require) {
           $('#home_btn_box').off('click');
           $('#terminal_btn_box').off('click');
           $('#browser_btn_box').off('click');
+          $('#trade_btn_box').off('click');
+          $('#ent_btn_box').off('click');
+
 
 
         },
