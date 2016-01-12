@@ -6,7 +6,7 @@ define(function (require) {
     var bb = require('backbone');
     var mn = require('marionette');
     var tmpl = require('hbs!app/templates/browserMenuView');
-    var _ = require ('underscore');
+    var _ = require('underscore');
 
 
 

@@ -35,12 +35,10 @@ requirejs.config({
 
 // Start the main app logic.
 requirejs(['jquery','app/GameEngine'],
-    function   (jquery,GameEngine) {
+    function(jquery,GameEngine) {
         //jQuery, and the app/sub module are all
         //loaded and can be used here now.
 
         //GameEngine is loaded and that is where the game logic starts...there is no call here
-
-
 
     });

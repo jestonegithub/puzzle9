@@ -7,8 +7,9 @@ define(function (require) {
     var tmpl = require('hbs!app/templates/entLayoutView');
     var eov = require('./entOverviewView');
     var eav = require('./entAdView');
-    var ephv = require('./entPurchaseHoldingsView');
-    var emhv = require('./entManageHoldingsView');
+    var ephv = require('./entPurchaseHoldingsCollectionView');
+    var emhv = require('./entManageHoldingsCollectionView');
+    var eawv = require('./entAvailWorkerView');
 
 
     //This is a LayoutView - and the root view of the game living in #main
@@ -25,6 +26,16 @@ define(function (require) {
 
         },
 
+        initialize:function(){
+
+            var current_page = this.model.get('current_page');
+            this.on('show',function(){
+                this['on'+current_page]();
+            },this);
+
+        },
+
+
         events:{
 
             'click #ent_menu_overview':'onOverview',
@@ -35,6 +46,10 @@ define(function (require) {
 
         onOverview:function(){
 
+            // clear existing underlines in menu and set selected menu item
+            $('.ent_menu').css('color','white');
+            $('#ent_menu_overview').css('color','yellow');
+
             this.getRegion('ads').empty();
             this.getRegion('holdings').show(new eov.EntOverviewView());
 
@@ -42,15 +57,25 @@ define(function (require) {
 
         onPurchase:function(){
 
+            // clear existing underlines in menu and set selected menu item
+            $('.ent_menu').css('color','white');
+            $('#ent_menu_purchase').css('color','yellow');
+
             this.getRegion('ads').show(new eav.EntAdView({model:this.model}));
-            this.getRegion('holdings').show(new ephv.EntPurchaseHoldingsView());
+            this.getRegion('holdings').show(new ephv.EntPurchaseHoldingsCollectionView({collection:this.model.get('purchase_collection')}));
+
 
         },
 
         onManage:function(){
 
-            this.getRegion('ads').empty();
-            this.getRegion('holdings').show(new emhv.EntManageHoldingsView());
+            // clear existing underlines in menu and set selected menu item
+            $('.ent_menu').css('color','white');
+            $('#ent_menu_manage').css('color','yellow');
+
+            this.getRegion('ads').show(new eawv.EntAvailWorkerView({model:this.model}));
+            this.getRegion('holdings').show(new emhv.EntManageHoldingsCollectionView({collection:this.model.get('manage_collection')}));
+            $('#ads').empty();
 
 
         }

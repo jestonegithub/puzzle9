@@ -1,12 +1,12 @@
 <div id="ads_and_workers">
     <div id=ads>
-        <div id=ads_title class="ads">NEW AD Rate (USD)</div>
-        <div id="ads_number" class="ads"></div>
-        <button type="button" class="btn ads">BUY ADS</button>
+        <div id=ads_title class="ads">NEW AD Rate {{ad_rate}} USD</div>
+        <div id="ads_number" class="ads">{{ads_purchased}}</div>
+        <button id="buy_ads_btn" type="button" class="btn ads">BUY ADS</button>
     </div>
 
-    <div id=workers>
-        <div id="worker_title" class="workers">Workers</div>
-        <div id="workers_number" class="workers"></div>
+    <div class=avail_workers>
+        <div class="worker_title workers">Available Workers</div>
+        <div class="avail_workers_number workers">{{workers_avail}}</div>
     </div>
 </div>

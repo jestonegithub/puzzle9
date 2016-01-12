@@ -18,10 +18,12 @@ define(function (require) {
 
             name:'',
             costs:{},
-            occupation_supported:'',
+            cost_list:'',
+            occupation:{},
             blurb: '',
             registering_items:[],
-            purchased: false
+            purchased: false,
+            listed:false
 
         },
 
@@ -69,6 +71,70 @@ define(function (require) {
     });
 
 
+    var occupations_table = {
+
+
+        coders: {
+
+            max: 10,
+            sinks:{
+                dollars:10
+            },
+            sources:{
+
+                btc:1,
+                emails:5,
+                pass:10
+
+
+            }
+        },
+
+        pharmacists: {
+            max: 10,
+            sinks:{
+                dollars:10
+            },
+            sources:{
+                pills:10
+            }
+        },
+
+        clerks:{
+            max:10,
+            sinks:{
+                dollars:10
+            },
+            sources:{
+                passports:1
+            }
+        },
+
+        journalists: {
+            max:10,
+            sinks:{
+                dollars:10
+            },
+            sources:{
+                intel:1,
+                trade:1
+            }
+
+
+
+        }
+        //,
+        //
+        //researchers: {},
+        //
+        //traders: {},
+        //
+        //engineers: {}
+
+
+    };
+
+
 
 
     var holdings_list={
@@ -78,9 +144,7 @@ define(function (require) {
             name:'Zyng!',
             occupation_supported: 'coders',
             costs: {
-
                 btc:1
-
             },
             blurb:'Addictive games with Adware.',
             registering_items:['emails','pass']
@@ -152,17 +216,37 @@ define(function (require) {
     };
 
 
-    var Holdings = {};
+    function objListString(obj){
+
+        var list='';
+
+        for (var name in obj) {
+            if (obj.hasOwnProperty(name)) {
+                list=list+name+': '+obj[name].toString()+' ';
+            }
+        }
+
+        return list;
+
+    }
+
+
+
+    var Holdings = {}; //an object containing all possible holdings in the game
 
     for (var name in holdings_list){
         if (holdings_list.hasOwnProperty(name)) {
 
             Holdings[name]= new HoldingModel({
 
+                'name':name,
                 'costs':holdings_list[name].costs,
-                'occupation_supported':holdings_list[name].occupation_supported,
+                'cost_list':objListString(holdings_list[name]['costs']),
                 'blurb': holdings_list[name].blurb,
                 'registering_items':holdings_list[name].registering_items,
+                'purchased':holdings_list[name].purchased,
+                'listed':holdings_list[name].listed,
+                'occupation':occupations_table[holdings_list[name].occupation_supported]
 
             })
 
@@ -170,7 +254,12 @@ define(function (require) {
         }
     }
 
-    return {Holdings:Holdings}
+
+
+
+    return {HoldingModel:HoldingModel,
+            Holdings:Holdings,
+            holdings_list:holdings_list}
 
 
 });

@@ -5,6 +5,7 @@
 
 define(function (require) {
     var bb = require('backbone');
+    var hm = require('./holdingModel');
 
 
 
@@ -17,7 +18,12 @@ define(function (require) {
             num_active: 0,
             max:'',
             sinks: {},
-            sources:{}
+            sources:{},
+            sink_list:[],
+            source_list:[],
+            holding_info:{},
+            sink_list_string:'',
+            source_list_string:''
 
         },
 
@@ -92,6 +98,7 @@ define(function (require) {
 
         coders: {
 
+            holding:'zyng',
             max: 10,
             sinks:{
                 dollars:10
@@ -107,6 +114,7 @@ define(function (require) {
         },
 
         pharmacists: {
+            holding:'zyng',
             max: 10,
             sinks:{
                 dollars:10
@@ -117,6 +125,7 @@ define(function (require) {
         },
 
         clerks:{
+            holding:'zyng',
             max:10,
             sinks:{
                 dollars:10
@@ -127,6 +136,7 @@ define(function (require) {
         },
 
         journalists: {
+            holding:'zyng',
             max:10,
             sinks:{
                 dollars:10
@@ -150,27 +160,44 @@ define(function (require) {
 
     };
 
+    function objListString(obj){
+
+        var list='';
+
+        for (var name in obj) {
+            if (obj.hasOwnProperty(name)) {
+                list=list+name+': '+obj[name].toString()+' ';
+            }
+        }
+    }
+
 
     var Occupations = {};
 
     for (var name in occupations_table){
         if (occupations_table.hasOwnProperty(name)) {
 
+            var holding_data = hm.holdings_list[occupations_table[name]['holding']];
+            console.log(holding_data);
+
             Occupations[name]= new OccupationModel({
                 'name': name,
+                'holding_info':{
+                    holding_name:holding_data['name'],
+                    holding_blurb:holding_data['blurb']
+                },
                 'max' : occupations_table[name].max,
                 'sinks' : occupations_table[name].sinks,
-                'sources' : occupations_table[name].sources
+                'sources' : occupations_table[name].sources,
+                'sink_list_string': objListString(occupations_table[name]['sinks']),
+                'source_list_string':objListString(occupations_table[name]['sources'])
              })
-
-
         }
     }
 
-
-
-
-    return {Occupations:Occupations}
+    //returning an object with all possible occupations
+    return {OccupationModel:OccupationModel,
+            Occupations:Occupations}
 
 
 });

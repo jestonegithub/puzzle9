@@ -4,7 +4,7 @@
 
 var tester = {};  //creating a global object that GameEngine instance will attach to so I can do manual calls for testing...
 
-define(function (require) {
+define(function(require) {
     var _ = require('underscore');
     var bb = require('backbone');
     var mn = require('marionette');
@@ -29,6 +29,8 @@ define(function (require) {
     var ptiv = require('./views/pricetickerItemView');
     var entv = require('./views/entLayoutView');
     var entm = require('./models/entModel');
+
+    //var hm = require('./models/holdingModel');
 
 
 
@@ -118,9 +120,11 @@ define(function (require) {
             //// trading model
             this.tradingModel = new trm.TradingModel();
 
-
+            //// ENT Model and its sub-models
             this.entModel = new entm.EntModel();
+            this.entModel.add_listed_holding('zyng');
 
+            //TODO: add purchase_holding collection
 
 
             this.listenTo(this.loadOSview,'loadOSEnd', function(){
